@@ -10,4 +10,10 @@
 
 @interface Device : NSObject
 
+@property (strong, nonatomic) NSString *name;
+
+@property NSInteger rotation_x;
+@property NSInteger rotation_y;
+@property NSInteger rotation_z;
+
 @end

@@ -15,6 +15,14 @@
 		4448DDC01F45AC2500A24D62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4448DDBE1F45AC2500A24D62 /* LaunchScreen.storyboard */; };
 		4448DDCB1F45AC2500A24D62 /* First_BLE_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4448DDCA1F45AC2500A24D62 /* First_BLE_AppTests.m */; };
 		4448DDD61F45AC2500A24D62 /* First_BLE_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4448DDD51F45AC2500A24D62 /* First_BLE_AppUITests.m */; };
+		4448DDE51F45AC3300A24D62 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */; };
+		4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C41F4F1A0F00B81963 /* DataModel.m */; };
+		4463F9C81F4F21FC00B81963 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C71F4F21FC00B81963 /* Device.m */; };
+		4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9CD1F4F4A6B00B81963 /* TableViewController.m */; };
+		44B290211F55AAF700F995FC /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B290201F55AAF700F995FC /* SceneKit.framework */; };
+		44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */; };
+		44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 44CE1D911F581C8E00CA79CE /* art.scnassets */; };
+		44FD72E81F5ABB420003664E /* MotionAnalysisIcons in Resources */ = {isa = PBXBuildFile; fileRef = 44FD72E71F5ABB420003664E /* MotionAnalysisIcons */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +59,19 @@
 		4448DDD11F45AC2500A24D62 /* First BLE AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "First BLE AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4448DDD51F45AC2500A24D62 /* First_BLE_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = First_BLE_AppUITests.m; sourceTree = "<group>"; };
 		4448DDD71F45AC2500A24D62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		4463F9C31F4F1A0F00B81963 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataModel.h; path = ../DataModel.h; sourceTree = "<group>"; };
+		4463F9C41F4F1A0F00B81963 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataModel.m; path = ../DataModel.m; sourceTree = "<group>"; };
+		4463F9C61F4F21FC00B81963 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
+		4463F9C71F4F21FC00B81963 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		4463F9CC1F4F4A6B00B81963 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
+		4463F9CD1F4F4A6B00B81963 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
+		44B290201F55AAF700F995FC /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
+		44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneKitViewController.h; path = ../SceneKitViewController.h; sourceTree = "<group>"; };
+		44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneKitViewController.m; path = ../SceneKitViewController.m; sourceTree = "<group>"; };
+		44CE1D911F581C8E00CA79CE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = SOURCE_ROOT; };
+		44E9E2A31F5609F6007948A2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		44FD72E71F5ABB420003664E /* MotionAnalysisIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MotionAnalysisIcons; path = ../../../MotionAnalysisIcons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44B290211F55AAF700F995FC /* SceneKit.framework in Frameworks */,
+				4448DDE51F45AC3300A24D62 /* CoreBluetooth.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +108,7 @@
 				4448DDC91F45AC2500A24D62 /* First BLE AppTests */,
 				4448DDD41F45AC2500A24D62 /* First BLE AppUITests */,
 				4448DDAE1F45AC2500A24D62 /* Products */,
+				4448DDE31F45AC3300A24D62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,10 +127,20 @@
 			children = (
 				4448DDB31F45AC2500A24D62 /* AppDelegate.h */,
 				4448DDB41F45AC2500A24D62 /* AppDelegate.m */,
+				44E9E2A31F5609F6007948A2 /* Constants.h */,
 				4448DDB61F45AC2500A24D62 /* ViewController.h */,
 				4448DDB71F45AC2500A24D62 /* ViewController.m */,
+				4463F9CC1F4F4A6B00B81963 /* TableViewController.h */,
+				4463F9CD1F4F4A6B00B81963 /* TableViewController.m */,
+				44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */,
+				44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */,
 				4448DDB91F45AC2500A24D62 /* Main.storyboard */,
+				4463F9C31F4F1A0F00B81963 /* DataModel.h */,
+				4463F9C41F4F1A0F00B81963 /* DataModel.m */,
+				4463F9C61F4F21FC00B81963 /* Device.h */,
+				4463F9C71F4F21FC00B81963 /* Device.m */,
 				4448DDBC1F45AC2500A24D62 /* Assets.xcassets */,
+				44CE1D911F581C8E00CA79CE /* art.scnassets */,
 				4448DDBE1F45AC2500A24D62 /* LaunchScreen.storyboard */,
 				4448DDC11F45AC2500A24D62 /* Info.plist */,
 				4448DDB01F45AC2500A24D62 /* Supporting Files */,
@@ -117,6 +151,7 @@
 		4448DDB01F45AC2500A24D62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44FD72E71F5ABB420003664E /* MotionAnalysisIcons */,
 				4448DDB11F45AC2500A24D62 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -138,6 +173,15 @@
 				4448DDD71F45AC2500A24D62 /* Info.plist */,
 			);
 			path = "First BLE AppUITests";
+			sourceTree = "<group>";
+		};
+		4448DDE31F45AC3300A24D62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				44B290201F55AAF700F995FC /* SceneKit.framework */,
+				4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +252,7 @@
 					4448DDAC1F45AC2500A24D62 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 5N7JE3F84Y;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					4448DDC51F45AC2500A24D62 = {
@@ -250,6 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4448DDC01F45AC2500A24D62 /* LaunchScreen.storyboard in Resources */,
+				44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */,
+				44FD72E81F5ABB420003664E /* MotionAnalysisIcons in Resources */,
 				4448DDBD1F45AC2500A24D62 /* Assets.xcassets in Resources */,
 				4448DDBB1F45AC2500A24D62 /* Main.storyboard in Resources */,
 			);
@@ -277,7 +324,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4448DDB81F45AC2500A24D62 /* ViewController.m in Sources */,
+				4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */,
+				4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */,
 				4448DDB51F45AC2500A24D62 /* AppDelegate.m in Sources */,
+				4463F9C81F4F21FC00B81963 /* Device.m in Sources */,
+				44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */,
 				4448DDB21F45AC2500A24D62 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,24 +479,37 @@
 		4448DDDB1F45AC2500A24D62 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5N7JE3F84Y;
 				INFOPLIST_FILE = "First BLE App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.leeds.First-BLE-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "First BLE App/First BLE App-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		4448DDDC1F45AC2500A24D62 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 5N7JE3F84Y;
 				INFOPLIST_FILE = "First BLE App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "uk.ac.leeds.First-BLE-App";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "First BLE App/First BLE App-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -518,6 +582,7 @@
 				4448DDDC1F45AC2500A24D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4448DDDD1F45AC2500A24D62 /* Build configuration list for PBXNativeTarget "First BLE AppTests" */ = {
 			isa = XCConfigurationList;
@@ -526,6 +591,7 @@
 				4448DDDF1F45AC2500A24D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4448DDE01F45AC2500A24D62 /* Build configuration list for PBXNativeTarget "First BLE AppUITests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +600,7 @@
 				4448DDE21F45AC2500A24D62 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

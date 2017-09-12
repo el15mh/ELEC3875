@@ -10,4 +10,34 @@
 
 @implementation DataModel
 
+- (void) initModel
+{
+    self.userName = @"Max Houghton";
+    self.age = 20;
+    self.gender = MALE;
+    self.height = 180;
+    self.weight = 75;
+}
+
+- (NSInteger) calculateDorsiflexion
+{
+    NSInteger dorsiflextion = 0;
+    
+    return self.nominalDorsiflexion + dorsiflextion;
+}
+
+- (NSInteger) calculateInversion
+{
+    NSInteger inversion = 0;
+    
+    return self.nominalInversion + inversion;
+}
+
+- (NSInteger) calculateAdduction
+{
+    NSInteger adduction = 0;
+    
+    return self.nominalAdduction + adduction;
+}
+
 @end
