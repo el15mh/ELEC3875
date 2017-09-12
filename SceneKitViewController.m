@@ -55,12 +55,6 @@
     backlight.position = SCNVector3Make(0, -30, -30);
     [scene.rootNode addChildNode:backlight];
     
-//    for (SCNNode *node in scene.rootNode.childNodes) {
-//        NSLog(@"node: %@", node.name);
-//    }
-    
-    //[block runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:0 z:2 duration:0.25]]];
-    
     // Configure the background
     self.scnView.backgroundColor = [UIColor whiteColor];
     
@@ -70,6 +64,8 @@
     // Retrieve the SCNView and add the scene to the view
     self.scnView.scene = scene;
     //self.scnView.showsStatistics = YES;
+    
+#pragma mark - Retrieve model nodes and setup motion
         
     // Retrieve the nodes
     SCNNode *Armature =     [scene.rootNode childNodeWithName:@"Armature" recursively:NO];
