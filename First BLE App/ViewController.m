@@ -37,20 +37,21 @@
     self.accelerometer_2.rotation_y = 0;
     self.accelerometer_2.rotation_z = 0;
     
-    self.model.phalangeLength = 0;
-    self.model.metatarsalLength = 0;
-    self.model.calcaneusLength = 0;
-    self.model.fibulaLength = 0;
-    self.model.A1Position = 0;
-    self.model.A2Position = 0;
+    self.model.phalange.length = 0;
+    self.model.metatarsal.length = 0;
+    self.model.calcaneus.length = 0;
+    self.model.fibula.length = 0;
     
-    self.model.rotationA1_x = self.accelerometer_1.rotation_x;
-    self.model.rotationA1_y = self.accelerometer_1.rotation_y;
-    self.model.rotationA1_z = self.accelerometer_1.rotation_z;
+    self.model.device1.position= 0;
+    self.model.device2.position = 0;
     
-    self.model.rotationA2_x = self.accelerometer_2.rotation_x;
-    self.model.rotationA2_y = self.accelerometer_2.rotation_y;
-    self.model.rotationA2_z = self.accelerometer_2.rotation_z;
+    self.model.device1.rotation_x = self.accelerometer_1.rotation_x;
+    self.model.device1.rotation_y = self.accelerometer_1.rotation_y;
+    self.model.device1.rotation_z = self.accelerometer_1.rotation_z;
+    
+    self.model.device2.rotation_x = self.accelerometer_2.rotation_x;
+    self.model.device2.rotation_y = self.accelerometer_2.rotation_y;
+    self.model.device2.rotation_z = self.accelerometer_2.rotation_z;
     
     self.userNameLabel.text = [NSString stringWithFormat:@"Name: %@", self.model.userName];
     self.ageLabel.text = [NSString stringWithFormat:@"Age: %ld", (long)self.model.age];
@@ -82,6 +83,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    // When view appears, set data labels to current profile
     self.userNameLabel.text =   [NSString stringWithFormat:@"Name: %@", self.model.userName];
     self.ageLabel.text =        [NSString stringWithFormat:@"Age: %ld", (long)self.model.age];
     
@@ -90,39 +92,6 @@
     
     self.heightLabel.text = [NSString stringWithFormat:@"Height: %ld", (long)self.model.height];
     self.weightLabel.text = [NSString stringWithFormat:@"Weight: %ld", (long)self.model.weight];
-}
-
-- (void) pauseScan
-{
-    // Scanning uses up battery, so stop scan for designated time interval
-    NSLog(@"*** Pausing scan");
-    
-    [NSTimer timerWithTimeInterval:TIMER_PAUSE_INTERVAL
-                            target:self
-                          selector:@selector(resumeScan)
-                          userInfo:nil
-                           repeats:NO];
-    
-    NSLog(@"Timer finished");
-    
-    [self.centralManager stopScan];
-}
-
-- (void) resumeScan
-{
-    if (self.scan)
-    {
-        NSLog(@"*** Resuming scan");
-        
-        [NSTimer timerWithTimeInterval:TIMER_SCAN_INTERVAL
-                                target:self
-                              selector:@selector(pauseScan)
-                              userInfo:nil
-                               repeats:NO];
-        
-        [self.centralManager scanForPeripheralsWithServices:nil
-                                                    options:nil];
-    }
 }
 
 #pragma mark - Navigation
@@ -169,45 +138,47 @@
 
 - (void) setA1:(NSInteger)A1Position
 {
-    self.model.A1Position = A1Position;
+    self.model.device1.position = A1Position;
 }
 
 - (void) setA2:(NSInteger)A2Position
 {
-    self.model.A2Position = A2Position;
+    self.model.device2.position = A2Position;
 }
 
 - (void) setFibula:(NSInteger)fibula
 {
-    self.model.fibulaLength = fibula;
+    self.model.fibula.length = fibula;
 }
 
 - (void) setCalcaneus:(NSInteger)calcaneus
 {
-    self.model.calcaneusLength = calcaneus;
+    self.model.calcaneus.length = calcaneus;
 }
 
 - (void) setMetatarsal:(NSInteger)metatarsal
 {
-    self.model.metatarsalLength = metatarsal;
+    self.model.metatarsal.length = metatarsal;
 }
 
 - (void) setPhalange:(NSInteger)phalange
 {
-    self.model.phalangeLength = phalange;
+    self.model.phalange.length = phalange;
 }
 
 #pragma mark - Setup Notifications
 
 - (void) sendAccelerometerValues
 {
-    NSNumber *x_device1 = [NSNumber numberWithInteger:self.model.rotationA1_x];
-    NSNumber *y_device1 = [NSNumber numberWithInteger:self.model.rotationA1_y];
-    NSNumber *z_device1 = [NSNumber numberWithInteger:self.model.rotationA1_z];
-    NSNumber *x_device2 = [NSNumber numberWithInteger:self.model.rotationA2_x];
-    NSNumber *y_device2 = [NSNumber numberWithInteger:self.model.rotationA2_y];
-    NSNumber *z_device2 = [NSNumber numberWithInteger:self.model.rotationA2_z];
+    // Send accelerometer values using NSNumber instances (compatible with NSDictionary)
+    NSNumber *x_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_x];
+    NSNumber *y_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_y];
+    NSNumber *z_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_z];
+    NSNumber *x_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_x];
+    NSNumber *y_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_y];
+    NSNumber *z_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_z];
 
+    // Store keys/values in dictionary property of class.
     self.accelerometerDictionary = @{@"x_1": x_device1,
                                      @"y_1": y_device1,
                                      @"z_1": z_device1,
@@ -226,7 +197,7 @@
 }
 
 #pragma mark - Updating the GUI
-
+//
 - (void) displayData:(NSData *)dataBytes
 {
     NSUInteger length = dataBytes.length;
@@ -246,7 +217,7 @@
     data -= 90;
 
     self.xRotationLabel.text = [NSString stringWithFormat:@"X Axis: %f", data];
-    self.model.rotationA1_x = data;
+    self.model.device1.rotation_x = data;
     
     //NSLog(@"%x", *dataArray);
     //NSLog(@"data = %i", (int)data);
@@ -277,24 +248,25 @@
             state = @"The BLE manager is resetting; an update is pending";
             break;
             
+        case CBManagerStateUnknown:
+            state = @"The state of the BLE Manager is unknown";
+            break;
+            
         case CBManagerStatePoweredOn:
             showAlert = NO;
             state = @"BLE is turned on and ready for communication";
             NSLog(@"%@", state);
             self.scan = YES;
             
-            [self.centralManager scanForPeripheralsWithServices:nil
-                                                        options:nil];
+            [self.centralManager scanForPeripheralsWithServices:nil options:nil];
             
             break;
-            
-        case CBManagerStateUnknown:
-            state = @"The state of the BLE Manager is unknown";
-            break;
-            
+          
+        /*
         default:
             state = @"The state of the BLE Manager is unknown";
             break;
+         */
     }
     
     if (showAlert)
@@ -322,6 +294,7 @@
 {
     NSString *peripheralName = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     NSString *peripheralUUID = peripheral.identifier.UUIDString;
+    
     if (!self.connected) NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
     
     if (peripheralName)
@@ -349,13 +322,8 @@
     self.statusLabel.text = [NSString stringWithFormat:@"Connected to: %@", peripheral.name];
     self.connected = true;
     
+    [central stopScan];
     [peripheral discoverServices:nil];
-    
-    NSLog(@"test");
-    
-    for (CBService *service in peripheral.services) {
-        NSLog(@"%@", service);
-    }
 }
 
 
@@ -367,6 +335,8 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     NSLog(@"*** Failed to connect to device");
     
     self.connected = false;
+
+    [central scanForPeripheralsWithServices:nil options:nil];
 }
 
 
@@ -386,18 +356,10 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
-    NSLog(@"Discovering services");
-    
     for (CBService *service in peripheral.services) {
         NSLog(@"Discovered service: %@", service);
         
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEALTH_THERMOMETER_SERVICE]])
-        {
-            [peripheral discoverCharacteristics:nil
-                                     forService:service];
-        }
-        
-        else if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_BATTERY_SERVICE]])
         {
             [peripheral discoverCharacteristics:nil
                                      forService:service];
@@ -410,22 +372,12 @@ didDiscoverServices:(NSError *)error
   didDiscoverCharacteristicsForService:(CBService *)service
                                  error:(NSError *)error
 {
-    NSLog(@"Discovering characteristics...");
-    
     for (CBCharacteristic *characteristic in service.characteristics) {
         //uint8_t enableValue = 1;
         //        NSData *enableBytes = [NSData dataWithBytes:&enableValue
         //                                             length:sizeof(uint8_t)];
         
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-        {
-            [self.peripheral setNotifyValue:YES
-                          forCharacteristic:characteristic];
-                        
-            NSLog(@"Discovered characteristic: %@", characteristic.description);
-        }
-        
-        else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_BATTERY_LEVEL_STATE_CHAR]])
         {
             [self.peripheral setNotifyValue:YES
                           forCharacteristic:characteristic];
@@ -436,18 +388,28 @@ didDiscoverServices:(NSError *)error
 }
 
 
+- (void)                            peripheral:(CBPeripheral *)peripheral
+   didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic
+                                         error:(NSError *)error
+{
+    if (error) NSLog(@"Error changing notification state: %@", [error localizedDescription]);
+    if (characteristic.isNotifying) NSLog(@"Notifying started on %@", characteristic);
+}
+
+
 - (void)                peripheral:(CBPeripheral *)peripheral
    didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic
                              error:(NSError *)error
 {
-    if (error) NSLog(@"Error changing notification state: %@", [error localizedDescription]);
-    else
-    {
-        NSData *dataBytes = characteristic.value;
-        
+    if (error) {
+        NSLog(@"Error changing notification state: %@", [error localizedDescription]);
+        return;
+    }
+    
+    else {
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
         {
-            [self displayData:dataBytes];
+            [self displayData:characteristic.value];
         }
     }
 }

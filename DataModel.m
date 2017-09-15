@@ -17,6 +17,23 @@
     self.gender = MALE;
     self.height = 180;
     self.weight = 75;
+    
+    self.fibula = [[Bone alloc] init];
+    self.calcaneus = [[Bone alloc] init];
+    self.navicular = [[Bone alloc] init];
+    self.metatarsal = [[Bone alloc] init];
+    self.phalange = [[Bone alloc] init];
+    
+    self.device1 = [[Device alloc] init];
+    self.device2 = [[Device alloc] init];
+    
+    self.device1.rotation_x = 0;
+    self.device1.rotation_y = 0;
+    self.device1.rotation_z = 0;
+    
+    self.device2.rotation_x = 0;
+    self.device2.rotation_y = 0;
+    self.device2.rotation_z = 0;
 }
 
 - (NSInteger) calculateDorsiflexion

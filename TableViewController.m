@@ -14,6 +14,7 @@
 
 @implementation TableViewController
 
+// Synthesize properties to be called from memory
 @synthesize delegate, userName, gender, age, height, weight, phalangeLength, metatarsalLength, calcaneusLength, fibulaLength, A1Position, A2Position;
 
 #pragma mark - Load Data Methods
@@ -21,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    // Create objects of to be used to call info from memory
     NSUserDefaults *nameDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *ageDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *genderDefault = [NSUserDefaults standardUserDefaults];
@@ -33,6 +35,7 @@
     NSUserDefaults *metatarsalDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *phalangeDefault = [NSUserDefaults standardUserDefaults];
     
+    // Load data from memory into previously created objects
     NSString *loadedNameString = [nameDefault objectForKey:@"nameString"];
     NSString *loadedAgeString = [ageDefault objectForKey:@"ageString"];
     NSString *loadedGenderString = [genderDefault objectForKey:@"genderString"];
@@ -45,6 +48,7 @@
     NSString *loadedMetatarsalString = [metatarsalDefault objectForKey:@"metatarsalString"];
     NSString *loadedPhalangeString = [phalangeDefault objectForKey:@"phalangeString"];
     
+    // Display the data loaded from memory in the appropriate table view cells
     [self.nameTextField setText:loadedNameString];
     [self.ageTextField setText:loadedAgeString];
     [self.heightTextField setText:loadedHeightString];
@@ -58,13 +62,6 @@
 
     if ([loadedGenderString  isEqualToString:@"0"]) self.genderSegmentControl.selectedSegmentIndex = 0;
     else self.genderSegmentControl.selectedSegmentIndex = 1;
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,6 +73,7 @@
 
 - (IBAction)doneButtonPressed:(id)sender {
     
+    // When this button is pressed, save the data currently in the table to memory
     NSString *nameString = self.nameTextField.text;
     NSString *ageString = self.ageTextField.text;
     NSString *genderString = [NSString stringWithFormat:@"%ld", (long)self.genderSegmentControl.selectedSegmentIndex];
@@ -88,6 +86,7 @@
     NSString *metatarsalString = self.metatarsalTextField.text;
     NSString *phalangeString = self.phalangeTextField.text;
     
+    // Store data in memory using the appropriate object type and key name (used to retrieve data)
     NSUserDefaults *nameDefault = [NSUserDefaults standardUserDefaults];
     [nameDefault setObject:nameString forKey:@"nameString"];
     
@@ -121,6 +120,7 @@
     NSUserDefaults *phalangeDefault = [NSUserDefaults standardUserDefaults];
     [phalangeDefault setObject:phalangeString forKey:@"phalangeString"];
 
+    // Final sequence of process of embedding the data into memory
     [nameDefault synchronize];
     [ageDefault synchronize];
     [genderDefault synchronize];
@@ -135,9 +135,8 @@
     
 #pragma mark - Send Data to ViewController
     
-    userName = nameString;
-    
-    [[self delegate] setName:nameString];
+    // Using custom protocol, send data to the viewcontroller via the methods defined in the protocol
+    [[self delegate] setName:userName];
     [[self delegate] setAge:[ageString floatValue]];
     [[self delegate] setGender:[genderString floatValue]];
     [[self delegate] setHeight:[heightString floatValue]];
@@ -155,6 +154,7 @@
 
 - (IBAction)clearTableButtonPressed:(id)sender {
     
+    // When this button is pressed, simply remove all data currently in the table
     self.nameTextField.text = @"";
     self.ageTextField.text = @"";
     self.heightTextField.text = @"";

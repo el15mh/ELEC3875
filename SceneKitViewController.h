@@ -8,11 +8,11 @@
 #include "Constants.h"
 
 #import <UIKit/UIKit.h>
-#import <SceneKit/SceneKit.h>
 
 #import "ViewController.h"
-
 #import "DataModel.h"
+
+@import SceneKit;
 
 @interface SceneKitViewController : UIViewController
 
@@ -22,10 +22,21 @@
 
 @property (strong, nonatomic) SCNNode *cameraNode;
 
+@property (strong, nonatomic) SCNNode *armatureNode;
+@property (strong, nonatomic) SCNNode *fibulaNode;
+@property (strong, nonatomic) SCNNode *navicularNode;
+@property (strong, nonatomic) SCNNode *calcaneusNode;
+@property (strong, nonatomic) SCNNode *metatarsalNode;
+@property (strong, nonatomic) SCNNode *phalangeNode;
+
 @property (strong, nonatomic) DataModel *model;
 
-- (void) receiveAccelerometerValues:(NSNotification *)accelerometerDictionary;
+@property (strong, nonatomic) NSMutableArray *rotationArray;
 
+@property float ticker; // dummy value to test updating the position of the model
+
+- (void) receiveAccelerometerValues:(NSNotification *)accelerometerDictionary;
+- (void) updateModelPosition;
 
 
 @end

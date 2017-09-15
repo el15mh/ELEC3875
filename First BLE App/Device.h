@@ -10,7 +10,7 @@
 
 @interface Device : NSObject
 
-@property (strong, nonatomic) NSString *name;
+@property NSInteger position;   // distance from ankle joint to each accelerometer
 
 @property NSInteger rotation_x;
 @property NSInteger rotation_y;

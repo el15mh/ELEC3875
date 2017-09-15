@@ -17,7 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // Create model to be used for data
     self.model = [[DataModel alloc] init];
+    [self.model initModel];
     
 #pragma mark - Setup Scene
     
@@ -48,6 +51,7 @@
     ambientLightNode.position = SCNVector3Make(0, 30, 30);
     [scene.rootNode addChildNode:ambientLightNode];
     
+    // Create a backlight node
     SCNNode *backlight = [SCNNode node];
     backlight.light = [SCNLight light];
     backlight.light.type = SCNLightTypeAmbient;
@@ -65,38 +69,61 @@
     self.scnView.scene = scene;
     //self.scnView.showsStatistics = YES;
     
-#pragma mark - Retrieve model nodes and setup motion
+#pragma mark - Retrieve model nodes and start motion
         
     // Retrieve the nodes
-    SCNNode *Armature =     [scene.rootNode childNodeWithName:@"Armature" recursively:NO];
-    SCNNode *Fibula =       [Armature childNodeWithName:@"Fibula" recursively:NO];
-    SCNNode *Navicular =    [Fibula childNodeWithName:@"Navicular" recursively:NO];
-    SCNNode *Calcaneus =    [Fibula childNodeWithName:@"Calcaneus" recursively:NO];
-    SCNNode *Metatarsal =   [Navicular childNodeWithName:@"Metatarsal" recursively:NO];
-    SCNNode *Phalange =     [Metatarsal childNodeWithName:@"Phalange" recursively:NO];
+    self.armatureNode =     [scene.rootNode childNodeWithName:@"Armature" recursively:NO];
+    self.fibulaNode =       [self.armatureNode childNodeWithName:@"Fibula" recursively:NO];
+    self.navicularNode =    [self.fibulaNode childNodeWithName:@"Navicular" recursively:NO];
+    self.calcaneusNode =    [self.fibulaNode childNodeWithName:@"Calcaneus" recursively:NO];
+    self.metatarsalNode =   [self.navicularNode childNodeWithName:@"Metatarsal" recursively:NO];
+    self.phalangeNode =     [self.metatarsalNode childNodeWithName:@"Phalange" recursively:NO];
+    
+    
+    // Create a timer to add to the main thread which updates the position of the nodes every 10ms
+    NSTimer *motionTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
+                                                   target:self
+                                                 selector:@selector(updateModelPosition)
+                                                 userInfo:nil
+                                                  repeats:YES];
+    
+    [[NSRunLoop mainRunLoop] addTimer:motionTimer
+                              forMode:NSRunLoopCommonModes];
+    
+    self.ticker = 1;
 
-    SCNVector3 axis;
-    
-    axis.x = 1;
-    axis.y = 1;
-    axis.z = 0;
-    
-    //[Armature runAction:[SCNAction rotateByAngle:45 aroundAxis:axis duration:10.0f]]
-    //[Phalange runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:1 z:0 duration:1]]];
-    [Metatarsal runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:1 z:0 duration:1]]];
-    
-//    for (SCNNode *node in Armature.childNodes){
-//        NSLog(@"node = %@", node.name);
-//    }
     
 #pragma mark - Setup Notifications
     
+    // Add method to subscribe to the notifications being broadcast from the ViewController class in the separate tab
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(receiveAccelerometerValues:)
                                                  name:@"AccelerometerValues"
                                                object:nil];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) updateModelPosition
+{
+    self.model.phalange.currentXRotation = [self.model.phalange setMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
+                                                                setMinimumRotation:MINIMUM_PHALANGE_X_ROTATION
+                                                                forCurrentRotation:self.model.device1.rotation_x];
+    
+    self.model.metatarsal.currentXRotation = [self.model.metatarsal setMaximumRotation:MAXIMUM_METATARSAL_X_ROTATION
+                                                                    setMinimumRotation:MINIMUM_METATARSAL_Y_ROTATION
+                                                                    forCurrentRotation:self.model.device1.rotation_x];
+    
+    [self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
+    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
+}
+
+#pragma mark - Receive Notifications
+
+// This method runs continuously every 100ms on a separate thread
 - (void) receiveAccelerometerValues:(NSNotification *)accelerometerDictionary
 {
     NSDictionary *accelerometerInfo = accelerometerDictionary.userInfo;
@@ -111,15 +138,16 @@
     self.deviceOneLabel.text = [NSString stringWithFormat:@"Device 1: x: %@, y: %@, z: %@", x1_value, y1_value, z1_value];
     self.deviceTwoLabel.text = [NSString stringWithFormat:@"Device 2: x: %@, y: %@, z: %@", x2_value, y2_value, z2_value];
     
-    self.model.rotationA1_x = [x1_value floatValue];
-    self.model.rotationA1_y = [y1_value floatValue];
-    self.model.rotationA1_z = [z1_value floatValue];
-    self.model.rotationA2_x = [x2_value floatValue];
-    self.model.rotationA2_y = [y2_value floatValue];
-    self.model.rotationA2_z = [z2_value floatValue];
+    self.model.device1.rotation_x = [x1_value floatValue];
+    self.model.device1.rotation_y = [y1_value floatValue];
+    self.model.device1.rotation_z = [z1_value floatValue];
+    self.model.device2.rotation_x = [x2_value floatValue];
+    self.model.device2.rotation_y = [y2_value floatValue];
+    self.model.device2.rotation_z = [z2_value floatValue];
     
-    //NSLog(@"float test: %ld", (long)self.model.rotationA1_x);
+    //NSLog(@"float test: %ld", (long)self.model.device1.rotation_x);
     //NSLog(@"received dictionary: %@", accelerometerInfo);
+    
 }
 
 - (BOOL) shouldAutorotate
@@ -131,10 +159,4 @@
 {
     return YES;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

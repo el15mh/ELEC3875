@@ -16,6 +16,7 @@
 		4448DDCB1F45AC2500A24D62 /* First_BLE_AppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4448DDCA1F45AC2500A24D62 /* First_BLE_AppTests.m */; };
 		4448DDD61F45AC2500A24D62 /* First_BLE_AppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4448DDD51F45AC2500A24D62 /* First_BLE_AppUITests.m */; };
 		4448DDE51F45AC3300A24D62 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */; };
+		444F32151F6941CF00F3ADCB /* Bone.m in Sources */ = {isa = PBXBuildFile; fileRef = 444F32141F6941CF00F3ADCB /* Bone.m */; };
 		4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C41F4F1A0F00B81963 /* DataModel.m */; };
 		4463F9C81F4F21FC00B81963 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C71F4F21FC00B81963 /* Device.m */; };
 		4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9CD1F4F4A6B00B81963 /* TableViewController.m */; };
@@ -60,6 +61,8 @@
 		4448DDD51F45AC2500A24D62 /* First_BLE_AppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = First_BLE_AppUITests.m; sourceTree = "<group>"; };
 		4448DDD71F45AC2500A24D62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		444F32131F6941CF00F3ADCB /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bone.h; sourceTree = "<group>"; };
+		444F32141F6941CF00F3ADCB /* Bone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bone.m; sourceTree = "<group>"; };
 		4463F9C31F4F1A0F00B81963 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataModel.h; path = ../DataModel.h; sourceTree = "<group>"; };
 		4463F9C41F4F1A0F00B81963 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataModel.m; path = ../DataModel.m; sourceTree = "<group>"; };
 		4463F9C61F4F21FC00B81963 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 				4448DDB91F45AC2500A24D62 /* Main.storyboard */,
 				4463F9C31F4F1A0F00B81963 /* DataModel.h */,
 				4463F9C41F4F1A0F00B81963 /* DataModel.m */,
+				444F32131F6941CF00F3ADCB /* Bone.h */,
+				444F32141F6941CF00F3ADCB /* Bone.m */,
 				4463F9C61F4F21FC00B81963 /* Device.h */,
 				4463F9C71F4F21FC00B81963 /* Device.m */,
 				4448DDBC1F45AC2500A24D62 /* Assets.xcassets */,
@@ -328,6 +333,7 @@
 				4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */,
 				4448DDB51F45AC2500A24D62 /* AppDelegate.m in Sources */,
 				4463F9C81F4F21FC00B81963 /* Device.m in Sources */,
+				444F32151F6941CF00F3ADCB /* Bone.m in Sources */,
 				44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */,
 				4448DDB21F45AC2500A24D62 /* main.m in Sources */,
 			);

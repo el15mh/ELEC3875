@@ -12,7 +12,7 @@
 #import "SceneKitViewController.h"
 
 #include "DataModel.h"
-#include "Device.h"
+//#include "Device.h"
 #include "Constants.h"
 
 @import QuartzCore;
@@ -48,14 +48,10 @@
 
 @property (strong, nonatomic) NSDictionary *accelerometerDictionary;
 
-- (void) sendAccelerometerValues;
-
 #pragma mark - UIView Methods
 
 - (void) displayData:(NSData *)dataBytes;
-
-- (void) pauseScan;
-- (void) resumeScan;
+- (void) sendAccelerometerValues;
 
 
 @end
