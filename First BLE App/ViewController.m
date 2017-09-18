@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <passData>
+@interface ViewController () <passData, UITableViewDataSource, UITableViewDataSource>
 
 @end
 
@@ -19,14 +19,16 @@
     // Do any additional setup after loading the view, typically from a nib
     
     self.model = [[DataModel alloc] init];
-    self.accelerometer_1 = [[Device alloc] init];
-    self.accelerometer_2 = [[Device alloc] init];
+    
+    self.bleDevicesArray = [NSMutableArray array];
     
     [self.model initModel];
     
     self.centralManager = [[CBCentralManager alloc] initWithDelegate:self
                                                                queue:nil
                                                              options:nil];
+    
+    //tableView.numberOfSections;
     
     // Initialize all values to 0
     self.accelerometer_1.rotation_x = 0;
@@ -42,16 +44,8 @@
     self.model.calcaneus.length = 0;
     self.model.fibula.length = 0;
     
-    self.model.device1.position= 0;
+    self.model.device1.position = 0;
     self.model.device2.position = 0;
-    
-    self.model.device1.rotation_x = self.accelerometer_1.rotation_x;
-    self.model.device1.rotation_y = self.accelerometer_1.rotation_y;
-    self.model.device1.rotation_z = self.accelerometer_1.rotation_z;
-    
-    self.model.device2.rotation_x = self.accelerometer_2.rotation_x;
-    self.model.device2.rotation_y = self.accelerometer_2.rotation_y;
-    self.model.device2.rotation_z = self.accelerometer_2.rotation_z;
     
     self.userNameLabel.text = [NSString stringWithFormat:@"Name: %@", self.model.userName];
     self.ageLabel.text = [NSString stringWithFormat:@"Age: %ld", (long)self.model.age];
@@ -65,13 +59,13 @@
     self.statusLabel.text = @"Searching...";
     self.connected = false;
     
-    NSTimer *valuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
-                                                   target:self
-                                                 selector:@selector(sendAccelerometerValues)
-                                                 userInfo:nil
-                                                  repeats:YES];
+    NSTimer *updateValuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
+                                                         target:self
+                                                       selector:@selector(sendNotifications)
+                                                       userInfo:nil
+                                                        repeats:YES];
     
-    [[NSRunLoop mainRunLoop] addTimer:valuesTimer
+    [[NSRunLoop mainRunLoop] addTimer:updateValuesTimer
                               forMode:NSRunLoopCommonModes];
 }
 
@@ -156,6 +150,11 @@
     self.model.calcaneus.length = calcaneus;
 }
 
+- (void) setNavicular:(NSInteger)navicular
+{
+    self.model.navicular.length = navicular;
+}
+
 - (void) setMetatarsal:(NSInteger)metatarsal
 {
     self.model.metatarsal.length = metatarsal;
@@ -168,7 +167,7 @@
 
 #pragma mark - Setup Notifications
 
-- (void) sendAccelerometerValues
+- (void) sendNotifications
 {
     // Send accelerometer values using NSNumber instances (compatible with NSDictionary)
     NSNumber *x_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_x];
@@ -186,14 +185,41 @@
                                      @"y_2": y_device2,
                                      @"z_2": z_device2};
     
+    // Create notification centre instance to be used to send data
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
-    //NSLog(@"sending dictionary: %@", self.accelerometerDictionary);
-    
+    // Start posting notifications containing accelerometer data
     [nc postNotificationName:@"AccelerometerValues"
                       object:self
                     userInfo:self.accelerometerDictionary];
     
+    [self.tableView reloadData];
+    //NSLog(@"number of table rows: %ld", (long)self.tableView.numberOfSections);
+}
+
+#pragma mark - TableView Delegate Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView
+ numberOfRowsInSection:(NSInteger)section
+{
+    //NSLog(@"number of rows = %ld", (long)[self.bleDevicesArray count]);
+    return 8;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    cell.textLabel.textColor = [UIColor blueColor];
+
+    return cell;
 }
 
 #pragma mark - Updating the GUI
@@ -202,8 +228,6 @@
 {
     NSUInteger length = dataBytes.length;
     uint32_t dataArray[length];
-    
-    //NSLog(@"%@", dataBytes);
     
     for (int i = 0; i < length; i++) dataArray[i] = 0;
     
@@ -258,7 +282,8 @@
             NSLog(@"%@", state);
             self.scan = YES;
             
-            [self.centralManager scanForPeripheralsWithServices:nil options:nil];
+            [self.centralManager scanForPeripheralsWithServices:nil
+                                                        options:nil];
             
             break;
           
@@ -295,7 +320,11 @@
     NSString *peripheralName = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     NSString *peripheralUUID = peripheral.identifier.UUIDString;
     
-    if (!self.connected) NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
+    if (!self.connected)
+    {
+        [self.bleDevicesArray addObject:peripheral];
+        NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
+    }
     
     if (peripheralName)
     {
@@ -312,6 +341,8 @@
                                            options:nil];
         }
     }
+    
+    //NSLog(@"No. of devices found: %ld", (long)[self.bleDevicesArray count]);
 }
 
 
@@ -336,7 +367,8 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     
     self.connected = false;
 
-    [central scanForPeripheralsWithServices:nil options:nil];
+    [central scanForPeripheralsWithServices:nil
+                                    options:nil];
 }
 
 

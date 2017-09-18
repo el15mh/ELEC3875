@@ -37,7 +37,9 @@
 
 - (void) initModel;
 
-- (NSInteger) calculateDorsiflexion;
+- (NSInteger) calculateDorsiflexion:(NSInteger) fibulaRotation
+              forMetatarsalRotation:(NSInteger) metatarsalRotation;
+
 - (NSInteger) calculateInversion;
 - (NSInteger) calculateAdduction;
 

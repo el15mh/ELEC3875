@@ -10,6 +10,8 @@
 
 @implementation DataModel
 
+#pragma mark - Initialize model parameters
+
 - (void) initModel
 {
     self.userName = @"Max Houghton";
@@ -36,11 +38,15 @@
     self.device2.rotation_z = 0;
 }
 
-- (NSInteger) calculateDorsiflexion
+#pragma mark - Calculate
+
+- (NSInteger) calculateDorsiflexion:(NSInteger) fibulaRotation
+              forMetatarsalRotation:(NSInteger) metatarsalRotation
 {
-    NSInteger dorsiflextion = 0;
+    // Dorsiflexion is rotation between top of foot and shin in sagittal plane
+    NSInteger dorsiflexion = fibulaRotation + metatarsalRotation;
     
-    return self.nominalDorsiflexion + dorsiflextion;
+    return self.nominalDorsiflexion + dorsiflexion;
 }
 
 - (NSInteger) calculateInversion

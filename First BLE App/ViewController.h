@@ -30,10 +30,13 @@
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
+@property (nonatomic, strong) NSMutableArray *bleDevicesArray;
 @property (nonatomic, assign) BOOL scan;
 @property (nonatomic, assign) BOOL connected;
 
 #pragma mark - UIView Properties
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
@@ -51,7 +54,7 @@
 #pragma mark - UIView Methods
 
 - (void) displayData:(NSData *)dataBytes;
-- (void) sendAccelerometerValues;
+- (void) sendNotifications;
 
 
 @end

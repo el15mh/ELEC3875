@@ -23,6 +23,7 @@
 - (void) setA2:(NSInteger)A2Position;
 - (void) setFibula:(NSInteger)fibula;
 - (void) setCalcaneus:(NSInteger)calcaneus;
+- (void) setNavicular:(NSInteger)navicular;
 - (void) setMetatarsal:(NSInteger)metatarsal;
 - (void) setPhalange:(NSInteger)phalange;
 
@@ -43,6 +44,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *fibulaTextField;
 @property (weak, nonatomic) IBOutlet UITextField *calcaneusTextField;
+@property (weak, nonatomic) IBOutlet UITextField *navicularTextField;
 @property (weak, nonatomic) IBOutlet UITextField *metatarsalTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phalangeTextField;
 
@@ -55,6 +57,7 @@
 
 @property NSInteger phalangeLength;
 @property NSInteger metatarsalLength;
+@property NSInteger navicularLength;
 @property NSInteger calcaneusLength;
 @property NSInteger fibulaLength;
 

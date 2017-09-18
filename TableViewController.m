@@ -15,7 +15,7 @@
 @implementation TableViewController
 
 // Synthesize properties to be called from memory
-@synthesize delegate, userName, gender, age, height, weight, phalangeLength, metatarsalLength, calcaneusLength, fibulaLength, A1Position, A2Position;
+@synthesize delegate, userName, gender, age, height, weight, phalangeLength, metatarsalLength, navicularLength, calcaneusLength, fibulaLength, A1Position, A2Position;
 
 #pragma mark - Load Data Methods
 
@@ -32,6 +32,7 @@
     NSUserDefaults *A2Default = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *fibulaDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *calcaneusDefault = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *navicularDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *metatarsalDefault = [NSUserDefaults standardUserDefaults];
     NSUserDefaults *phalangeDefault = [NSUserDefaults standardUserDefaults];
     
@@ -45,6 +46,7 @@
     NSString *loadedA2String = [A2Default objectForKey:@"A2PositionString"];
     NSString *loadedFibulaString = [fibulaDefault objectForKey:@"fibulaString"];
     NSString *loadedCalcaneusString = [calcaneusDefault objectForKey:@"calcaneusString"];
+    NSString *loadedNavicularString = [navicularDefault objectForKey:@"navicularString"];
     NSString *loadedMetatarsalString = [metatarsalDefault objectForKey:@"metatarsalString"];
     NSString *loadedPhalangeString = [phalangeDefault objectForKey:@"phalangeString"];
     
@@ -57,11 +59,12 @@
     [self.A2PositionTextField setText:loadedA2String];
     [self.fibulaTextField setText:loadedFibulaString];
     [self.calcaneusTextField setText:loadedCalcaneusString];
+    [self.navicularTextField setText:loadedNavicularString];
     [self.metatarsalTextField setText:loadedMetatarsalString];
     [self.phalangeTextField setText:loadedPhalangeString];
 
-    if ([loadedGenderString  isEqualToString:@"0"]) self.genderSegmentControl.selectedSegmentIndex = 0;
-    else self.genderSegmentControl.selectedSegmentIndex = 1;
+    if ([loadedGenderString isEqualToString:@"0"]) self.genderSegmentControl.selectedSegmentIndex = MALE;
+    else self.genderSegmentControl.selectedSegmentIndex = FEMALE;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,6 +86,7 @@
     NSString *A2PositionString = self.A2PositionTextField.text;
     NSString *fibulaString = self.fibulaTextField.text;
     NSString *calcaneusString = self.calcaneusTextField.text;
+    NSString *navicularString = self.navicularTextField.text;
     NSString *metatarsalString = self.metatarsalTextField.text;
     NSString *phalangeString = self.phalangeTextField.text;
     
@@ -114,6 +118,9 @@
     NSUserDefaults *calcaneusDefault = [NSUserDefaults standardUserDefaults];
     [calcaneusDefault setObject:calcaneusString forKey:@"calcaneusString"];
     
+    NSUserDefaults *navicularDefault = [NSUserDefaults standardUserDefaults];
+    [navicularDefault setObject:navicularString forKey:@"navicularString"];
+    
     NSUserDefaults *metatarsalDefault = [NSUserDefaults standardUserDefaults];
     [metatarsalDefault setObject:metatarsalString forKey:@"metatarsalString"];
     
@@ -130,6 +137,7 @@
     [A2Default synchronize];
     [fibulaDefault synchronize];
     [calcaneusDefault synchronize];
+    [navicularDefault synchronize];
     [metatarsalDefault synchronize];
     [phalangeDefault synchronize];
     
@@ -144,6 +152,7 @@
     [[self delegate] setA1:[A1PositionString floatValue]];
     [[self delegate] setA2:[A2PositionString floatValue]];
     [[self delegate] setFibula:[fibulaString floatValue]];
+    [[self delegate] setNavicular:[fibulaString floatValue]];
     [[self delegate] setCalcaneus:[calcaneusString floatValue]];
     [[self delegate] setMetatarsal:[metatarsalString floatValue]];
     [[self delegate] setPhalange:[phalangeString floatValue]];
@@ -166,6 +175,7 @@
     self.fibulaTextField.text = @"";
     self.calcaneusTextField.text = @"";
     self.metatarsalTextField.text = @"";
+    self.navicularTextField.text = @"";
     self.phalangeTextField.text = @"";
     
     self.genderSegmentControl.selectedSegmentIndex = 0;

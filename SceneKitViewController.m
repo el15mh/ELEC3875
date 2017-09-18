@@ -41,7 +41,7 @@
     lightNode.light = [SCNLight light];
     lightNode.light.type = SCNLightTypeOmni;
     lightNode.position = SCNVector3Make(0, 10, 30);
-    [scene.rootNode addChildNode:lightNode];
+    //[scene.rootNode addChildNode:lightNode];
     
     // Create an ambient light node
     SCNNode *ambientLightNode = [SCNNode node];
@@ -49,7 +49,7 @@
     ambientLightNode.light.type = SCNLightTypeAmbient;
     ambientLightNode.light.color = [UIColor darkGrayColor];
     ambientLightNode.position = SCNVector3Make(0, 30, 30);
-    [scene.rootNode addChildNode:ambientLightNode];
+    //[scene.rootNode addChildNode:ambientLightNode];
     
     // Create a backlight node
     SCNNode *backlight = [SCNNode node];
@@ -57,7 +57,7 @@
     backlight.light.type = SCNLightTypeAmbient;
     backlight.light.color = [UIColor darkGrayColor];
     backlight.position = SCNVector3Make(0, -30, -30);
-    [scene.rootNode addChildNode:backlight];
+    //[scene.rootNode addChildNode:backlight];
     
     // Configure the background
     self.scnView.backgroundColor = [UIColor whiteColor];
@@ -79,7 +79,6 @@
     self.metatarsalNode =   [self.navicularNode childNodeWithName:@"Metatarsal" recursively:NO];
     self.phalangeNode =     [self.metatarsalNode childNodeWithName:@"Phalange" recursively:NO];
     
-    
     // Create a timer to add to the main thread which updates the position of the nodes every 10ms
     NSTimer *motionTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
                                                    target:self
@@ -87,13 +86,23 @@
                                                  userInfo:nil
                                                   repeats:YES];
     
+    self.model.metatarsal.nominalXRotation = self.metatarsalNode.rotation.x;
+    NSLog(@"Nominal navicular x rotation: %ld", (long)self.navicularNode.rotation.x);
+    NSLog(@"Nominal navicular y rotation: %ld", (long)self.navicularNode.rotation.y);
+    NSLog(@"Nominal navicular z rotation: %ld", (long)self.navicularNode.rotation.z);
+    NSLog(@"Nominal metatarsal x rotation: %ld", (long)self.navicularNode.rotation.x);
+    NSLog(@"Nominal metatarsal y rotation: %ld", (long)self.navicularNode.rotation.y);
+    NSLog(@"Nominal metatarsal z rotation: %ld", (long)self.navicularNode.rotation.z);
+
     [[NSRunLoop mainRunLoop] addTimer:motionTimer
                               forMode:NSRunLoopCommonModes];
+    
+    
     
     self.ticker = 1;
 
     
-#pragma mark - Setup Notifications
+#pragma mark - Receive Notifications
     
     // Add method to subscribe to the notifications being broadcast from the ViewController class in the separate tab
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -109,14 +118,20 @@
 
 - (void) updateModelPosition
 {
+    // Using constraints (obtained arbitrarily from 3D model) to give rough limits to bone rotation
+    self.model.calcaneus.currentXRotation = [self.model.calcaneus setMaximumRotation:90
+                                                                  setMinimumRotation:-90
+                                                                  forCurrentRotation:self.model.device1.rotation_x];
+    
     self.model.phalange.currentXRotation = [self.model.phalange setMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
                                                                 setMinimumRotation:MINIMUM_PHALANGE_X_ROTATION
                                                                 forCurrentRotation:self.model.device1.rotation_x];
     
     self.model.metatarsal.currentXRotation = [self.model.metatarsal setMaximumRotation:MAXIMUM_METATARSAL_X_ROTATION
-                                                                    setMinimumRotation:MINIMUM_METATARSAL_Y_ROTATION
+                                                                    setMinimumRotation:MINIMUM_METATARSAL_X_ROTATION
                                                                     forCurrentRotation:self.model.device1.rotation_x];
     
+    [self.calcaneusNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.calcaneus.currentXRotation*DEG2RAD*(-1))];
     [self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
     [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
 }
@@ -159,4 +174,11 @@
 {
     return YES;
 }
+
+- (IBAction)calibrateButtonPressed:(UIBarButtonItem *)sender {
+    
+    NSLog(@"Calibrate button pressed");
+}
+
+
 @end
