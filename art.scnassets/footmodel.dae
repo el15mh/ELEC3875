@@ -4,8 +4,8 @@
   <contributor>
    <authoring_tool>SceneKit Collada Exporter v1.0</authoring_tool>
   </contributor>
-  <created>2017-09-18T13:50:36Z</created>
-  <modified>2017-09-18T13:50:36Z</modified>
+  <created>2017-09-18T14:10:37Z</created>
+  <modified>2017-09-18T14:10:37Z</modified>
   <unit meter="1.000000"/>
   <up_axis>Z_UP</up_axis>
  </asset>
@@ -92,19 +92,13 @@
   <effect id="effect_Untitled_Body_Defaultskin-material">
    <profile_COMMON>
     <technique sid="common">
-     <phong>
+     <lambert>
       <ambient>
-       <color>0.985409 0.740102 0.558706 0.922464</color>
+       <color>0.985409 0.740102 0.558706 1</color>
       </ambient>
       <diffuse>
-       <color>0.985409 0.740102 0.558706 1</color>
+       <color>1 0.740102 0.558706 1</color>
       </diffuse>
-      <specular>
-       <color>0.870588 0.658824 0.498039 1</color>
-      </specular>
-      <shininess>
-       <float>491</float>
-      </shininess>
       <reflective>
        <color>0 0 0 0.930249</color>
       </reflective>
@@ -117,7 +111,7 @@
       <index_of_refraction>
        <float>1</float>
       </index_of_refraction>
-     </phong>
+     </lambert>
     </technique>
    </profile_COMMON>
    <extra>
