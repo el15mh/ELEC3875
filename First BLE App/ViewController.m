@@ -368,6 +368,11 @@ didDiscoverServices:(NSError *)error
             [peripheral discoverCharacteristics:nil
                                      forService:service];
         }
+        
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
+        {
+            NSLog(@"Discovered HR Servie👍");
+        }
     }
 }
 
