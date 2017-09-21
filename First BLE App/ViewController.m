@@ -349,6 +349,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
                   error:(NSError *)error
 {
     self.statusLabelOne.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
+    self.statusLabelTwo.text = @"";
     self.connected = false;
     
     NSLog(@"*** Disconnected from device");
