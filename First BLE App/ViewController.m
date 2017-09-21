@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <passData, UITableViewDataSource, UITableViewDataSource>
+@interface ViewController () <passData>
 
 @end
 
@@ -56,7 +56,8 @@
     self.heightLabel.text = [NSString stringWithFormat:@"Height: %ld", (long)self.model.height];
     self.weightLabel.text = [NSString stringWithFormat:@"Weight: %ld", (long)self.model.weight];
     
-    self.statusLabel.text = @"Searching...";
+    self.statusLabelOne.text = @"Searching...";
+    self.statusLabelTwo.text = @"";
     self.connected = false;
     
     NSTimer *updateValuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
@@ -193,33 +194,7 @@
                       object:self
                     userInfo:self.accelerometerDictionary];
     
-    [self.tableView reloadData];
     //NSLog(@"number of table rows: %ld", (long)self.tableView.numberOfSections);
-}
-
-#pragma mark - TableView Delegate Methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView
- numberOfRowsInSection:(NSInteger)section
-{
-    //NSLog(@"number of rows = %ld", (long)[self.bleDevicesArray count]);
-    return 8;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    cell.textLabel.textColor = [UIColor blueColor];
-
-    return cell;
 }
 
 #pragma mark - Updating the GUI
@@ -284,14 +259,11 @@
             
             [self.centralManager scanForPeripheralsWithServices:nil
                                                         options:nil];
-            
             break;
           
-        /*
         default:
             state = @"The state of the BLE Manager is unknown";
             break;
-         */
     }
     
     if (showAlert)
@@ -332,8 +304,8 @@
         {
             self.scan = NO;
             
-            NSLog(@"Peripheral: %@", peripheralName);
-            
+            // RSSI - Received Signal Strength Indication
+            self.statusLabelTwo.text = [NSString stringWithFormat:@"Signal strength: %.2f", [RSSI floatValue]];
             self.peripheral = peripheral;
             self.peripheral.delegate = self;
             
@@ -350,7 +322,7 @@
    didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"*** Connected to device");
-    self.statusLabel.text = [NSString stringWithFormat:@"Connected to: %@", peripheral.name];
+    self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", peripheral.name];
     self.connected = true;
     
     [central stopScan];
@@ -362,7 +334,7 @@
 didFailToConnectPeripheral:(CBPeripheral *)peripheral
                      error:(NSError *)error
 {
-    self.statusLabel.text = @"Failed to connect";
+    self.statusLabelOne.text = @"Failed to connect";
     NSLog(@"*** Failed to connect to device");
     
     self.connected = false;
@@ -376,7 +348,7 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
 didDisconnectPeripheral:(CBPeripheral *)peripheral
                   error:(NSError *)error
 {
-    self.statusLabel.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
+    self.statusLabelOne.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
     self.connected = false;
     
     NSLog(@"*** Disconnected from device");

@@ -87,6 +87,7 @@
                                                   repeats:YES];
     
     self.model.metatarsal.nominalXRotation = self.metatarsalNode.rotation.x;
+    
     NSLog(@"Nominal navicular x rotation: %ld", (long)self.navicularNode.rotation.x);
     NSLog(@"Nominal navicular y rotation: %ld", (long)self.navicularNode.rotation.y);
     NSLog(@"Nominal navicular z rotation: %ld", (long)self.navicularNode.rotation.z);
@@ -96,11 +97,6 @@
 
     [[NSRunLoop mainRunLoop] addTimer:motionTimer
                               forMode:NSRunLoopCommonModes];
-    
-    
-    
-    self.ticker = 1;
-
     
 #pragma mark - Receive Notifications
     
@@ -121,7 +117,7 @@
     // Using constraints (obtained arbitrarily from 3D model) to give rough limits to bone rotation
     self.model.calcaneus.currentXRotation = [self.model.calcaneus setMaximumRotation:MAXIMUM_CALCANEUS_Y_ROTATION
                                                                   setMinimumRotation:MINIMUM_CALCANEUS_Y_ROTATION
-                                                                  forCurrentRotation:self.model.device1.rotation_x];
+                                                                  forCurrentRotation:self.model.device1.rotation_x * (-0.4f)];
     
     self.model.phalange.currentXRotation = [self.model.phalange setMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
                                                                 setMinimumRotation:MINIMUM_PHALANGE_X_ROTATION
@@ -131,9 +127,9 @@
                                                                     setMinimumRotation:MINIMUM_METATARSAL_X_ROTATION
                                                                     forCurrentRotation:self.model.device1.rotation_x];
     
-    [self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentXRotation*DEG2RAD*(-1))];
+    //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentXRotation*DEG2RAD)];
     [self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
-    //[self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
+    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
 }
 
 #pragma mark - Receive Notifications

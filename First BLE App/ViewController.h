@@ -30,13 +30,12 @@
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *peripheral;
+@property (nonatomic, strong) NSNumber *RSSI;
 @property (nonatomic, strong) NSMutableArray *bleDevicesArray;
 @property (nonatomic, assign) BOOL scan;
 @property (nonatomic, assign) BOOL connected;
 
 #pragma mark - UIView Properties
-
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
@@ -44,7 +43,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *heightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabelOne;
+@property (weak, nonatomic) IBOutlet UILabel *statusLabelTwo;
 
 @property (weak, nonatomic) IBOutlet UILabel *xRotationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yRotationLabel;
