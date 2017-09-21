@@ -177,7 +177,7 @@
     NSNumber *x_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_x];
     NSNumber *y_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_y];
     NSNumber *z_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_z];
-
+    
     // Store keys/values in dictionary property of class.
     self.accelerometerDictionary = @{@"x_1": x_device1,
                                      @"y_1": y_device1,
@@ -214,7 +214,7 @@
     double data = (double)rawData / 25600;
     
     data -= 90;
-
+    
     self.xRotationLabel.text = [NSString stringWithFormat:@"X Axis: %f", data];
     self.model.device1.rotation_x = data;
     
@@ -260,7 +260,7 @@
             [self.centralManager scanForPeripheralsWithServices:nil
                                                         options:nil];
             break;
-          
+            
         default:
             state = @"The state of the BLE Manager is unknown";
             break;
@@ -338,7 +338,7 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     NSLog(@"*** Failed to connect to device");
     
     self.connected = false;
-
+    
     [central scanForPeripheralsWithServices:nil
                                     options:nil];
 }
@@ -372,6 +372,8 @@ didDiscoverServices:(NSError *)error
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
         {
             NSLog(@"Discovered HR Servie👍");
+            [peripheral discoverCharacteristics:nil
+                                     forService:service];
         }
     }
 }
@@ -391,6 +393,13 @@ didDiscoverServices:(NSError *)error
             [self.peripheral setNotifyValue:YES
                           forCharacteristic:characteristic];
             
+            NSLog(@"Discovered characteristic: %@", characteristic.description);
+        }
+        
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+        {
+            [self.peripheral setNotifyValue:YES
+                          forCharacteristic:characteristic];
             NSLog(@"Discovered characteristic: %@", characteristic.description);
         }
     }
@@ -415,11 +424,25 @@ didDiscoverServices:(NSError *)error
         return;
     }
     
-    else {
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-        {
-            [self displayData:characteristic.value];
-        }
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
+    {
+        [self displayData:characteristic.value];
+    }
+    
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+    {
+        unsigned result = 0;
+        
+        // Create data string by casting hex value from characteristic to a string
+        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
+        NSScanner *scanner = [NSScanner scannerWithString:data];
+        
+        [scanner setScanLocation:1];
+        [scanner scanHexInt:&result];
+        
+        NSLog(@"result = %i", result);
+        
+        self.xRotationLabel.text = [NSString stringWithFormat:@"HR value: %i", result];
     }
 }
 
