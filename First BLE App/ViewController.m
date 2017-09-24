@@ -200,26 +200,47 @@
 #pragma mark - Updating the GUI
 //
 - (void) displayData:(NSData *)dataBytes
+   forCharacteristic:(CBCharacteristic *)characteristic
 {
-    NSUInteger length = dataBytes.length;
-    uint32_t dataArray[length];
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
+    {
+        NSUInteger length = dataBytes.length;
+        uint32_t dataArray[length];
+        
+        for (int i = 0; i < length; i++) dataArray[i] = 0;
+        
+        [dataBytes getBytes:&dataArray
+                     length:length * sizeof(uint16_t)];
+        
+        uint32_t rawData = dataArray[1] + dataArray[0];
+        
+        double data = (double)rawData / 25600;
+        
+        data -= 90;
+        
+        self.xRotationLabel.text = [NSString stringWithFormat:@"X Axis: %f", data];
+        self.model.device1.rotation_x = data;
+        
+        //NSLog(@"%x", *dataArray);
+        //NSLog(@"data = %i", (int)data);
+    }
     
-    for (int i = 0; i < length; i++) dataArray[i] = 0;
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+    {
+        unsigned result = 0;
+        
+        // Create data string by casting hex value from characteristic to a string
+        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
+        NSScanner *scanner = [NSScanner scannerWithString:data];
+        
+        [scanner setScanLocation:1];
+        [scanner scanHexInt:&result];
+        
+        NSLog(@"result = %i", result);
+        
+        self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
+    }
     
-    [dataBytes getBytes:&dataArray
-                 length:length * sizeof(uint16_t)];
-    
-    uint32_t rawData = dataArray[1] + dataArray[0];
-    
-    double data = (double)rawData / 25600;
-    
-    data -= 90;
-    
-    self.xRotationLabel.text = [NSString stringWithFormat:@"X Axis: %f", data];
-    self.model.device1.rotation_x = data;
-    
-    //NSLog(@"%x", *dataArray);
-    //NSLog(@"data = %i", (int)data);
 }
 
 
@@ -439,23 +460,14 @@ didDiscoverServices:(NSError *)error
         
         NSLog(@"result = %i", result);
         
-        [self displayData:characteristic.value];
+        [self   displayData:characteristic.value
+          forCharacteristic:characteristic];
     }
     
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
     {
-        unsigned result = 0;
-        
-        // Create data string by casting hex value from characteristic to a string
-        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
-        NSScanner *scanner = [NSScanner scannerWithString:data];
-        
-        [scanner setScanLocation:1];
-        [scanner scanHexInt:&result];
-        
-        NSLog(@"result = %i", result);
-        
-        self.xRotationLabel.text = [NSString stringWithFormat:@"HR value: %i", result];
+        [self   displayData:characteristic.value
+          forCharacteristic:characteristic];
     }
 }
 

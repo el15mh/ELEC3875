@@ -53,7 +53,8 @@
 
 #pragma mark - UIView Methods
 
-- (void) displayData:(NSData *)dataBytes;
+- (void) displayData:(NSData *)dataBytes
+   forCharacteristic:(CBCharacteristic *)characteristic;
 - (void) sendNotifications;
 
 
