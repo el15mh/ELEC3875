@@ -28,8 +28,6 @@
                                                                queue:nil
                                                              options:nil];
     
-    //tableView.numberOfSections;
-    
     // Initialize all values to 0
     self.accelerometer_1.rotation_x = 0;
     self.accelerometer_1.rotation_y = 0;
