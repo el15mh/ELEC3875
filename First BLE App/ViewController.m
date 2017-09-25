@@ -236,8 +236,6 @@
         [scanner setScanLocation:1];
         [scanner scanHexInt:&result];
         
-        NSLog(@"result = %i", result);
-        
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }
     
@@ -448,18 +446,6 @@ didDiscoverServices:(NSError *)error
     
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
     {
-        unsigned result = 0;
-        
-        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
-        NSScanner *scanner = [NSScanner scannerWithString:data];
-        
-        NSLog(@"data = %@", data);
-        
-        [scanner setScanLocation:1];
-        [scanner scanHexInt:&result];
-        
-        NSLog(@"result = %i", result);
-        
         [self   displayData:characteristic.value
           forCharacteristic:characteristic];
     }
