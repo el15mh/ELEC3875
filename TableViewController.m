@@ -144,7 +144,7 @@
 #pragma mark - Send Data to ViewController
     
     // Using custom protocol, send data to the viewcontroller via the methods defined in the protocol
-    [[self delegate] setName:userName];
+    [[self delegate] setName:nameString];
     [[self delegate] setAge:[ageString floatValue]];
     [[self delegate] setGender:[genderString floatValue]];
     [[self delegate] setHeight:[heightString floatValue]];

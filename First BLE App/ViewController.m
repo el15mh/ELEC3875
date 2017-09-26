@@ -302,6 +302,8 @@
             NSLog(@"%@", state);
             self.scan = YES;
             
+            self.statusLabelOne.text = @"Scanning...";
+            
             [NSTimer scheduledTimerWithTimeInterval:TIMER_SCAN_INTERVAL
                                              target:self
                                            selector:@selector(pauseScan)
