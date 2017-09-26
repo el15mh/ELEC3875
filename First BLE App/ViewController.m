@@ -241,6 +241,8 @@
         [scanner setScanLocation:1];
         [scanner scanHexInt:&result];
         
+        result -= 90;
+        
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }
     
@@ -257,7 +259,7 @@
                                    userInfo:nil
                                     repeats:NO];
     
-    if (self.connected) self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to %@", self.peripheral.name];
+    if (self.connected) self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", self.peripheral.name];
 }
 
 - (void) resumeScan
@@ -363,7 +365,7 @@
             self.scan = NO;
             
             // RSSI - Received Signal Strength Indication
-            self.statusLabelTwo.text = [NSString stringWithFormat:@"Signal strength: %.2f", [RSSI floatValue]];
+            self.statusLabelTwo.text = [NSString stringWithFormat:@"Signal strength: %.0f", [RSSI floatValue]];
             self.peripheral = peripheral;
             self.peripheral.delegate = self;
             
@@ -415,8 +417,8 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
 didDisconnectPeripheral:(CBPeripheral *)peripheral
                   error:(NSError *)error
 {
-    self.statusLabelOne.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
-    self.statusLabelTwo.text = @"";
+    self.statusLabelTwo.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
+    self.statusLabelOne.text = @"";
     self.connected = NO;
     
     self.scan = YES;
@@ -505,19 +507,17 @@ didDiscoverServices:(NSError *)error
         return;
     }
     
-    [self displayData:characteristic.value forCharacteristic:characteristic];
-    
-//    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-//    {
-//        [self   displayData:characteristic.value
-//          forCharacteristic:characteristic];
-//    }
-//
-//    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
-//    {
-//        [self   displayData:characteristic.value
-//          forCharacteristic:characteristic];
-//    }
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
+    {
+        [self   displayData:characteristic.value
+          forCharacteristic:characteristic];
+    }
+
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+    {
+        [self   displayData:characteristic.value
+          forCharacteristic:characteristic];
+    }
 }
 
 
