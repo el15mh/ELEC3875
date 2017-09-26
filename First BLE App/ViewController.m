@@ -37,10 +37,11 @@
     self.accelerometer_2.rotation_y = 0;
     self.accelerometer_2.rotation_z = 0;
     
-    self.model.phalange.length = 0;
-    self.model.metatarsal.length = 0;
-    self.model.calcaneus.length = 0;
-    self.model.fibula.length = 0;
+    self.fibulaLabel.text = [NSString stringWithFormat:@"Fibula: %ld mm", (long)self.model.fibula.length];
+    self.navicularLabel.text = [NSString stringWithFormat:@"Navicular: %ld mm", (long)self.model.navicular.length];
+    self.calcaneusLabel.text = [NSString stringWithFormat:@"Calcaneus: %ld mm", (long)self.model.calcaneus.length];
+    self.metatarsalLabel.text = [NSString stringWithFormat:@"Metatarsal: %ld mm", (long)self.model.metatarsal.length];
+    self.phalangeLabel.text = [NSString stringWithFormat:@"Phalanges: %ld mm", (long)self.model.phalange.length];
     
     self.model.device1.position = 0;
     self.model.device2.position = 0;
@@ -57,7 +58,7 @@
     self.statusLabelOne.text = @"";
     self.statusLabelTwo.text = @"";
     self.connected = false;
-    
+        
     NSTimer *updateValuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
                                                          target:self
                                                        selector:@selector(sendNotifications)
@@ -83,8 +84,14 @@
     if (self.model.gender == MALE) self.sexLabel.text = @"Gender: Male";
     else self.sexLabel.text = @"Gender: Female";
     
-    self.heightLabel.text = [NSString stringWithFormat:@"Height: %ld", (long)self.model.height];
-    self.weightLabel.text = [NSString stringWithFormat:@"Weight: %ld", (long)self.model.weight];
+    self.heightLabel.text = [NSString stringWithFormat:@"Height: %ld cm", (long)self.model.height];
+    self.weightLabel.text = [NSString stringWithFormat:@"Weight: %ld kg", (long)self.model.weight];
+    
+    self.fibulaLabel.text = [NSString stringWithFormat:@"Fibula: %ld mm", (long)self.model.fibula.length];
+    self.navicularLabel.text = [NSString stringWithFormat:@"Navicular: %ld mm", (long)self.model.navicular.length];
+    self.calcaneusLabel.text = [NSString stringWithFormat:@"Calcaneus: %ld mm", (long)self.model.calcaneus.length];
+    self.metatarsalLabel.text = [NSString stringWithFormat:@"Metatarsal: %ld mm", (long)self.model.metatarsal.length];
+    self.phalangeLabel.text = [NSString stringWithFormat:@"Phalanges: %ld mm", (long)self.model.phalange.length];
 }
 
 #pragma mark - Navigation
@@ -345,7 +352,7 @@
     NSString *peripheralName = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     NSString *peripheralUUID = peripheral.identifier.UUIDString;
     
-    if (!self.connected) //NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
+    if (!self.connected) NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
     
     if (peripheralName)
     {
@@ -374,7 +381,7 @@
     self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", peripheral.name];
     self.connected = true;
     
-    [central stopScan];
+    [self.centralManager stopScan];
     [peripheral discoverServices:nil];
 }
 
@@ -386,7 +393,8 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     self.statusLabelOne.text = @"Failed to connect";
     NSLog(@"*** Failed to connect to device");
     
-    self.connected = false;
+    self.connected = NO;
+    self.scan = YES;
     
     [central scanForPeripheralsWithServices:nil
                                     options:nil];
@@ -474,17 +482,19 @@ didDiscoverServices:(NSError *)error
         return;
     }
     
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-    {
-        [self   displayData:characteristic.value
-          forCharacteristic:characteristic];
-    }
+    [self displayData:characteristic.value forCharacteristic:characteristic];
     
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
-    {
-        [self   displayData:characteristic.value
-          forCharacteristic:characteristic];
-    }
+//    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
+//    {
+//        [self   displayData:characteristic.value
+//          forCharacteristic:characteristic];
+//    }
+//
+//    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+//    {
+//        [self   displayData:characteristic.value
+//          forCharacteristic:characteristic];
+//    }
 }
 
 

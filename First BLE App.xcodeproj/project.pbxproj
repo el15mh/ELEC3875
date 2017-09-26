@@ -23,6 +23,7 @@
 		44B290211F55AAF700F995FC /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B290201F55AAF700F995FC /* SceneKit.framework */; };
 		44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */; };
 		44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 44CE1D911F581C8E00CA79CE /* art.scnassets */; };
+		44D48FA31F7A9FF1005E9AD4 /* boneOutline.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D48FA21F7A9FF0005E9AD4 /* boneOutline.png */; };
 		44FD72E81F5ABB420003664E /* MotionAnalysisIcons in Resources */ = {isa = PBXBuildFile; fileRef = 44FD72E71F5ABB420003664E /* MotionAnalysisIcons */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneKitViewController.h; path = ../SceneKitViewController.h; sourceTree = "<group>"; };
 		44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneKitViewController.m; path = ../SceneKitViewController.m; sourceTree = "<group>"; };
 		44CE1D911F581C8E00CA79CE /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = SOURCE_ROOT; };
+		44D48FA21F7A9FF0005E9AD4 /* boneOutline.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = boneOutline.png; sourceTree = "<group>"; };
 		44E9E2A31F5609F6007948A2 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		44FD72E71F5ABB420003664E /* MotionAnalysisIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MotionAnalysisIcons; path = ../../../MotionAnalysisIcons; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				44FD72E71F5ABB420003664E /* MotionAnalysisIcons */,
+				44D48FA21F7A9FF0005E9AD4 /* boneOutline.png */,
 				4448DDB11F45AC2500A24D62 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -303,6 +306,7 @@
 				44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */,
 				44FD72E81F5ABB420003664E /* MotionAnalysisIcons in Resources */,
 				4448DDBD1F45AC2500A24D62 /* Assets.xcassets in Resources */,
+				44D48FA31F7A9FF1005E9AD4 /* boneOutline.png in Resources */,
 				4448DDBB1F45AC2500A24D62 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -29,6 +29,12 @@
     self.device1 = [[Device alloc] init];
     self.device2 = [[Device alloc] init];
     
+    self.fibula.length = 67;
+    self.navicular.length = 25;
+    self.calcaneus.length = 17;
+    self.metatarsal.length = 24;
+    self.phalange.length = 15;
+    
     self.device1.rotation_x = 0;
     self.device1.rotation_y = 0;
     self.device1.rotation_z = 0;

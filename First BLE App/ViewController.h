@@ -43,6 +43,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *heightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weightLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *fibulaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *navicularLabel;
+@property (weak, nonatomic) IBOutlet UILabel *calcaneusLabel;
+@property (weak, nonatomic) IBOutlet UILabel *metatarsalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *phalangeLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *statusLabelOne;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabelTwo;
 
