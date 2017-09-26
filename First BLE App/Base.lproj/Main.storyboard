@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--details-->
+        <!--Details-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="details" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController title="Details" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -833,10 +833,10 @@
             </objects>
             <point key="canvasLocation" x="7476" y="138.98050974512745"/>
         </scene>
-        <!--Tab Bar View Controller-->
+        <!--Tab View Controller-->
         <scene sceneID="i4H-DC-qId">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="bD3-Pr-smf" customClass="TabBarViewController" sceneMemberID="viewController">
+                <tabBarController title="Tab View Controller" automaticallyAdjustsScrollViewInsets="NO" id="bD3-Pr-smf" customClass="TabBarViewController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="buw-CQ-ZPZ">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -890,10 +890,10 @@
             </objects>
             <point key="canvasLocation" x="5692" y="886.50674662668678"/>
         </scene>
-        <!--Details-->
+        <!--details Nav Controller-->
         <scene sceneID="QuI-Ka-gXY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ss5-CM-Uly" sceneMemberID="viewController">
+                <navigationController title="details Nav Controller" automaticallyAdjustsScrollViewInsets="NO" id="ss5-CM-Uly" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Details" image="FormIcon.png" selectedImage="FormIcon.png" id="VRt-Gl-zZE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="JiC-GU-gcD">

@@ -53,6 +53,9 @@
 
 #pragma mark - UIView Methods
 
+- (void) resumeScan;
+- (void) pauseScan;
+
 - (void) displayData:(NSData *)dataBytes
    forCharacteristic:(CBCharacteristic *)characteristic;
 - (void) sendNotifications;

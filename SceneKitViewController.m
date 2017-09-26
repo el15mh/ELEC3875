@@ -128,8 +128,8 @@
                                                                     forCurrentRotation:self.model.device1.rotation_x];
     
     //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentXRotation*DEG2RAD)];
-    [self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
-    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
+    //[self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
+    //[self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
 }
 
 #pragma mark - Receive Notifications

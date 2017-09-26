@@ -54,7 +54,7 @@
     self.heightLabel.text = [NSString stringWithFormat:@"Height: %ld", (long)self.model.height];
     self.weightLabel.text = [NSString stringWithFormat:@"Weight: %ld", (long)self.model.weight];
     
-    self.statusLabelOne.text = @"Searching...";
+    self.statusLabelOne.text = @"";
     self.statusLabelTwo.text = @"";
     self.connected = false;
     
@@ -239,7 +239,35 @@
     
 }
 
+- (void) pauseScan
+{
+    // Scanning uses phone battery, so pause the scan process for the designated interval
+    NSLog(@"*** Pausing scan");
+    self.statusLabelOne.text = @"Pausing scan...";
+    [NSTimer scheduledTimerWithTimeInterval:TIMER_SCAN_INTERVAL
+                                     target:self
+                                   selector:@selector(resumeScan)
+                                   userInfo:nil
+                                    repeats:NO];
+}
 
+- (void) resumeScan
+{
+    if (self.scan)
+    {
+        // Start scanning again...
+        NSLog(@"*** Resuming scan");
+        self.statusLabelOne.text = @"Resuming scan...";
+        [NSTimer scheduledTimerWithTimeInterval:TIMER_PAUSE_INTERVAL
+                                         target:self
+                                       selector:@selector(pauseScan)
+                                       userInfo:nil
+                                        repeats:NO];
+        
+        [self.centralManager scanForPeripheralsWithServices:nil
+                                                    options:nil];
+    }
+}
 #pragma mark - CBCentralManagerDelegate methods
 
 - (void) centralManagerDidUpdateState:(CBCentralManager *)central
@@ -247,7 +275,7 @@
     BOOL showAlert = YES;
     NSString *state = @"";
     
-    switch ([self.centralManager state]) {
+    switch ([central state]) {
         case CBManagerStateUnsupported:
             state = @"This device does not support Bluetooth Low Energy";
             break;
@@ -273,6 +301,12 @@
             state = @"BLE is turned on and ready for communication";
             NSLog(@"%@", state);
             self.scan = YES;
+            
+            [NSTimer scheduledTimerWithTimeInterval:TIMER_SCAN_INTERVAL
+                                             target:self
+                                           selector:@selector(pauseScan)
+                                           userInfo:nil
+                                            repeats:NO];
             
             [self.centralManager scanForPeripheralsWithServices:nil
                                                         options:nil];
@@ -309,11 +343,7 @@
     NSString *peripheralName = [advertisementData objectForKey:@"kCBAdvDataLocalName"];
     NSString *peripheralUUID = peripheral.identifier.UUIDString;
     
-    if (!self.connected)
-    {
-        [self.bleDevicesArray addObject:peripheral];
-        NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
-    }
+    if (!self.connected) //NSLog(@"Next peripheral: %@ (%@)", peripheralName, peripheralUUID);
     
     if (peripheralName)
     {
@@ -389,7 +419,7 @@ didDiscoverServices:(NSError *)error
         
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
         {
-            NSLog(@"Discovered HR Servie👍");
+            NSLog(@"Discovered HR Service👍");
             [peripheral discoverCharacteristics:nil
                                      forService:service];
         }
