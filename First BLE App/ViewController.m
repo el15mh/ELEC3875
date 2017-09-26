@@ -256,6 +256,8 @@
                                    selector:@selector(resumeScan)
                                    userInfo:nil
                                     repeats:NO];
+    
+    if (self.connected) self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to %@", self.peripheral.name];
 }
 
 - (void) resumeScan
@@ -379,7 +381,7 @@
 {
     NSLog(@"*** Connected to device");
     self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", peripheral.name];
-    self.connected = true;
+    self.connected = YES;
     
     [self.centralManager stopScan];
     [peripheral discoverServices:nil];
@@ -396,8 +398,16 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
     self.connected = NO;
     self.scan = YES;
     
-    [central scanForPeripheralsWithServices:nil
-                                    options:nil];
+    self.statusLabelOne.text = @"Scanning...";
+    
+    [NSTimer scheduledTimerWithTimeInterval:TIMER_SCAN_INTERVAL
+                                     target:self
+                                   selector:@selector(pauseScan)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+    [self.centralManager scanForPeripheralsWithServices:nil
+                                                options:nil];
 }
 
 
@@ -407,7 +417,20 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 {
     self.statusLabelOne.text = [NSString stringWithFormat:@"Disconnected from: %@", peripheral.name];
     self.statusLabelTwo.text = @"";
-    self.connected = false;
+    self.connected = NO;
+    
+    self.scan = YES;
+    
+    self.statusLabelOne.text = @"Scanning...";
+    
+    [NSTimer scheduledTimerWithTimeInterval:TIMER_SCAN_INTERVAL
+                                     target:self
+                                   selector:@selector(pauseScan)
+                                   userInfo:nil
+                                    repeats:NO];
+    
+    [self.centralManager scanForPeripheralsWithServices:nil
+                                                options:nil];
     
     NSLog(@"*** Disconnected from device");
 }
