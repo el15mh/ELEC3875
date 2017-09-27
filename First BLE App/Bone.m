@@ -10,13 +10,13 @@
 
 @implementation Bone
 
-- (NSInteger) setMaximumRotation:(NSInteger)maxRotation
-              setMinimumRotation:(NSInteger)minRotation
-              forCurrentRotation:(NSInteger)currentRotation
+- (NSInteger) findCurrentPosition:(NSInteger)currentPosition
+               forMaximumRotation:(NSInteger)maximumRotation
+               forMinimumRotation:(NSInteger)mininumRotation
 {
-    if (currentRotation >= maxRotation) return maxRotation;
-    else if (currentRotation <= minRotation) return minRotation;
-    else return currentRotation;
+    if (currentPosition >= maximumRotation) return maximumRotation;
+    else if (currentPosition <= mininumRotation) return mininumRotation;
+    else return currentPosition;
 }
 
 @end

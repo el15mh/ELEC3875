@@ -36,6 +36,9 @@
     // Place camera
     self.cameraNode.position = SCNVector3Make(0, 10, 35);
     
+    // Allows the user to control the camera
+    self.scnView.allowsCameraControl = YES;
+    
     // Create light node and add to scene
     SCNNode *lightNode = [SCNNode node];
     lightNode.light = [SCNLight light];
@@ -61,9 +64,6 @@
     
     // Configure the background
     self.scnView.backgroundColor = [UIColor whiteColor];
-    
-    // Allows the user to control the camera
-    self.scnView.allowsCameraControl = YES;
     
     // Retrieve the SCNView and add the scene to the view
     self.scnView.scene = scene;
@@ -96,6 +96,8 @@
                                              selector:@selector(receiveAccelerometerValues:)
                                                  name:@"AccelerometerValues"
                                                object:nil];
+    
+    NSLog(@"initial metatarsal rotation: %ld", (long)self.metatarsalNode.rotation.x);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -106,22 +108,26 @@
 - (void) updateModelPosition
 {
     // Using constraints (obtained arbitrarily from 3D model) to give rough limits to bone rotation
-    self.model.calcaneus.currentXRotation = [self.model.calcaneus setMaximumRotation:MAXIMUM_CALCANEUS_Y_ROTATION
-                                                                  setMinimumRotation:MINIMUM_CALCANEUS_Y_ROTATION
-                                                                  forCurrentRotation:self.model.device1.rotation_y * (-0.4f)];
+    float calcaneusX = self.model.calcaneus.currentXRotation;
+    float phalangeX = self.model.phalange.currentXRotation;
+    float metatarsalX = self.model.metatarsal.currentXRotation;
     
-    self.model.phalange.currentXRotation = [self.model.phalange setMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
-                                                                setMinimumRotation:MINIMUM_PHALANGE_X_ROTATION
-                                                                forCurrentRotation:self.model.device1.rotation_y];
+    metatarsalX += [self.model.metatarsal findCurrentPosition:(self.model.device1.rotation_x + METATARSAL_X_OFFSET)
+                                           forMaximumRotation:MAXIMUM_METATARSAL_X_ROTATION
+                                           forMinimumRotation:MINIMUM_METATARSAL_X_ROTATION];
     
-    self.model.metatarsal.currentXRotation = [self.model.metatarsal setMaximumRotation:MAXIMUM_METATARSAL_X_ROTATION
-                                                                    setMinimumRotation:MINIMUM_METATARSAL_X_ROTATION
-                                                                    forCurrentRotation:self.model.device1.rotation_y];
+    phalangeX += [self.model.phalange findCurrentPosition:self.model.device1.rotation_x
+                                       forMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
+                                       forMinimumRotation:MINIMUM_PHALANGE_X_ROTATION];
     
-    //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentXRotation*DEG2RAD)];
+    calcaneusX += [self.model.calcaneus findCurrentPosition:self.model.device1.rotation_x
+                                         forMaximumRotation:MAXIMUM_CALCANEUS_Y_ROTATION
+                                         forMinimumRotation:MINIMUM_CALCANEUS_Y_ROTATION];
     
-    [self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
-    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.metatarsal.currentXRotation*DEG2RAD)];
+    //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentYRotation*DEG2RAD)];
+    //[self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
+    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, metatarsalX*DEG2RAD)];
+    //NSLog(@"metatarsal node rotation: %f", self.metatarsalNode.rotation.x);
 }
 
 #pragma mark - Receive Notifications
@@ -159,9 +165,20 @@
     return YES;
 }
 
-- (IBAction)calibrateButtonPressed:(UIBarButtonItem *)sender {
-    
+- (IBAction)calibrateButtonPressed:(UIBarButtonItem *)sender
+{
     NSLog(@"Calibrate button pressed");
+    
+    self.model.calcaneus.currentXRotation = 0.0f;
+    self.model.phalange.currentXRotation = 0.0f;
+    self.model.metatarsal.currentXRotation = 0.0f;
+    
+    self.model.device1.rotation_x -= self.model.device1.rotation_x;
+    self.model.device1.rotation_y -= self.model.device1.rotation_y;
+    self.model.device1.rotation_z -= self.model.device1.rotation_z;
+    self.model.device2.rotation_x -= self.model.device2.rotation_x;
+    self.model.device2.rotation_y -= self.model.device2.rotation_y;
+    self.model.device2.rotation_z -= self.model.device2.rotation_z;
 }
 
 

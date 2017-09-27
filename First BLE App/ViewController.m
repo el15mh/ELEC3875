@@ -455,7 +455,6 @@ didDiscoverServices:(NSError *)error
         
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
         {
-            NSLog(@"Discovered HR Service👍");
             [peripheral discoverCharacteristics:nil
                                      forService:service];
         }
@@ -468,9 +467,6 @@ didDiscoverServices:(NSError *)error
                                  error:(NSError *)error
 {
     for (CBCharacteristic *characteristic in service.characteristics) {
-        //uint8_t enableValue = 1;
-        //        NSData *enableBytes = [NSData dataWithBytes:&enableValue
-        //                                             length:sizeof(uint8_t)];
         
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
         {
@@ -484,6 +480,7 @@ didDiscoverServices:(NSError *)error
         {
             [self.peripheral setNotifyValue:YES
                           forCharacteristic:characteristic];
+            
             NSLog(@"Discovered characteristic: %@", characteristic.description);
         }
     }

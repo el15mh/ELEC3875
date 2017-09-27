@@ -20,8 +20,8 @@
 @property NSInteger nominalYRotation;
 @property NSInteger nominalZRotation;
 
-- (NSInteger) setMaximumRotation:(NSInteger)maxRotation
-              setMinimumRotation:(NSInteger)minRotation
-              forCurrentRotation:(NSInteger)currentRotation;
+- (NSInteger) findCurrentPosition:(NSInteger)currentPosition
+               forMaximumRotation:(NSInteger)maximumRotation
+               forMinimumRotation:(NSInteger)mininumRotation;
 
 @end

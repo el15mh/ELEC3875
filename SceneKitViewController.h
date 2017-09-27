@@ -34,8 +34,6 @@
 
 @property (strong, nonatomic) NSMutableArray *rotationArray;
 
-@property float ticker; // dummy value to test updating the position of the model
-
 - (IBAction)calibrateButtonPressed:(UIBarButtonItem *)sender;
 
 - (void) receiveAccelerometerValues:(NSNotification *)accelerometerDictionary;
