@@ -242,6 +242,7 @@
         [scanner scanHexInt:&result];
         
         result -= 90;
+        self.model.device1.rotation_y = result;
         
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }

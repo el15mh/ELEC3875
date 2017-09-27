@@ -30,6 +30,7 @@
 @property (strong, nonatomic) SCNNode *phalangeNode;
 
 @property (strong, nonatomic) DataModel *model;
+@property (nonatomic, assign) bool *firstValue;
 
 @property (strong, nonatomic) NSMutableArray *rotationArray;
 
