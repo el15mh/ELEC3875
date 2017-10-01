@@ -26,6 +26,12 @@
     self.metatarsal = [[Bone alloc] init];
     self.phalange = [[Bone alloc] init];
     
+    self.fibula.name = @"fibula";
+    self.navicular.name = @"navicular";
+    self.calcaneus.name = @"calcaneus";
+    self.metatarsal.name = @"metatarsal";
+    self.phalange.name = @"phalange";
+    
     self.device1 = [[Device alloc] init];
     self.device2 = [[Device alloc] init];
     
@@ -53,6 +59,28 @@
     NSInteger dorsiflexion = fibulaRotation + metatarsalRotation;
     
     return self.nominalDorsiflexion + dorsiflexion;
+}
+
+- (NSInteger) calculateRotation:(NSInteger)rotation
+                         onAxis:(NSString *)axis
+                        forBone:(Bone *)bone
+{
+    if ([axis isEqualToString:@"x"])
+    {
+        if ([bone.name isEqualToString:@"metatarsal"]) {
+            if (rotation >= MAXIMUM_METATARSAL_X_ROTATION) return MAXIMUM_METATARSAL_X_ROTATION;
+            else if (rotation <= MINIMUM_METATARSAL_X_ROTATION) return MINIMUM_METATARSAL_X_ROTATION;
+            else return rotation;
+        }
+        
+        else if ([bone.name isEqualToString:@"phalange"]) {
+            if (rotation >= MAXIMUM_PHALANGE_X_ROTATION) return MAXIMUM_PHALANGE_X_ROTATION;
+            else if (rotation <= MINIMUM_PHALANGE_X_ROTATION) return MINIMUM_PHALANGE_X_ROTATION;
+            else return rotation;
+        }
+    }
+    
+    return rotation;
 }
 
 - (NSInteger) calculateInversion

@@ -15,14 +15,14 @@
 
 @interface DataModel : NSObject
 
-@property (strong, nonatomic) Bone *fibula;
-@property (strong, nonatomic) Bone *calcaneus;
-@property (strong, nonatomic) Bone *navicular;
-@property (strong, nonatomic) Bone *metatarsal;
-@property (strong, nonatomic) Bone *phalange;
+@property (strong, nonnull) Bone *fibula;
+@property (strong, nonnull) Bone *calcaneus;
+@property (strong, nonnull) Bone *navicular;
+@property (strong, nonnull) Bone *metatarsal;
+@property (strong, nonnull) Bone *phalange;
 
-@property (strong, nonatomic) Device *device1;
-@property (strong, nonatomic) Device *device2;
+@property (strong, nonnull) Device *device1;
+@property (strong, nonnull) Device *device2;
 
 @property (strong, nonnull) NSString *userName;
 
@@ -39,6 +39,10 @@
 
 - (NSInteger) calculateDorsiflexion:(NSInteger) fibulaRotation
               forMetatarsalRotation:(NSInteger) metatarsalRotation;
+
+- (NSInteger) calculateRotation:(NSInteger)rotation
+                         onAxis:(NSString *)axis
+                        forBone:(Bone *)bone;
 
 - (NSInteger) calculateInversion;
 - (NSInteger) calculateAdduction;

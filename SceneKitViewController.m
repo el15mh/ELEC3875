@@ -112,17 +112,17 @@
     float phalangeX = self.model.phalange.currentXRotation;
     float metatarsalX = self.model.metatarsal.currentXRotation;
     
-    metatarsalX += [self.model.metatarsal findCurrentPosition:(self.model.device1.rotation_x + METATARSAL_X_OFFSET)
-                                           forMaximumRotation:MAXIMUM_METATARSAL_X_ROTATION
-                                           forMinimumRotation:MINIMUM_METATARSAL_X_ROTATION];
+    metatarsalX += [self.model calculateRotation:(self.model.phalange.currentXRotation + METATARSAL_X_OFFSET)
+                                          onAxis:@"x"
+                                         forBone:self.model.metatarsal];
     
-    phalangeX += [self.model.phalange findCurrentPosition:self.model.device1.rotation_x
-                                       forMaximumRotation:MAXIMUM_PHALANGE_X_ROTATION
-                                       forMinimumRotation:MINIMUM_PHALANGE_X_ROTATION];
+    phalangeX += [self.model calculateRotation:self.model.device1.rotation_x
+                                        onAxis:@"x"
+                                       forBone:self.model.phalange];
     
-    calcaneusX += [self.model.calcaneus findCurrentPosition:self.model.device1.rotation_x
-                                         forMaximumRotation:MAXIMUM_CALCANEUS_Y_ROTATION
-                                         forMinimumRotation:MINIMUM_CALCANEUS_Y_ROTATION];
+    calcaneusX += [self.model calculateRotation:self.model.device1.rotation_x
+                                         onAxis:@"x"
+                                        forBone:self.model.calcaneus];
     
     //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentYRotation*DEG2RAD)];
     //[self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];

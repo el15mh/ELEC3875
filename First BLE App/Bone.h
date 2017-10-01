@@ -10,6 +10,8 @@
 
 @interface Bone : NSObject
 
+@property (strong, nonatomic) NSString *name;
+
 @property NSInteger length;
 
 @property NSInteger currentXRotation;
