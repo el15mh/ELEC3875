@@ -387,7 +387,10 @@
     self.connected = YES;
     
     [self.centralManager stopScan];
+    
+    NSLog(@"*** Stopping scan");
     [peripheral discoverServices:nil];
+    NSLog(@"*** Discovering services...");
 }
 
 
@@ -444,6 +447,8 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
+    NSLog(@"Error discovering services: %@", [error localizedDescription]);
+    
     for (CBService *service in peripheral.services) {
         NSLog(@"Discovered service: %@", service);
         
