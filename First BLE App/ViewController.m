@@ -263,9 +263,17 @@
     if (self.connected) self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", self.peripheral.name];
 }
 
+- (IBAction)scanSwitchPressed:(UISwitch *)sender {
+    
+    if (sender.isOn) [self resumeScan];
+    else [self pauseScan];
+}
+
+
+
 - (void) resumeScan
 {
-    if (self.scan)
+    if (self.scan && self.scanSwitch.isOn)
     {
         // Start scanning again...
         NSLog(@"*** Resuming scan");
@@ -279,6 +287,8 @@
         [self.centralManager scanForPeripheralsWithServices:nil
                                                     options:nil];
     }
+    
+    else NSLog(@"*** Scanning turned off");
 }
 #pragma mark - CBCentralManagerDelegate methods
 
@@ -322,8 +332,11 @@
                                            userInfo:nil
                                             repeats:NO];
             
-            [self.centralManager scanForPeripheralsWithServices:nil
-                                                        options:nil];
+            if (self.scanSwitch.isOn) {
+                [self.centralManager scanForPeripheralsWithServices:nil
+                                                            options:nil];
+            }
+            
             break;
             
         default:
@@ -412,8 +425,10 @@ didFailToConnectPeripheral:(CBPeripheral *)peripheral
                                    userInfo:nil
                                     repeats:NO];
     
-    [self.centralManager scanForPeripheralsWithServices:nil
-                                                options:nil];
+    if (self.scanSwitch.isOn) {
+        [self.centralManager scanForPeripheralsWithServices:nil
+                                                    options:nil];
+    }
 }
 
 
@@ -435,8 +450,12 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
                                    userInfo:nil
                                     repeats:NO];
     
-    [self.centralManager scanForPeripheralsWithServices:nil
-                                                options:nil];
+    if (self.scanSwitch.isOn) {
+        [self.centralManager scanForPeripheralsWithServices:nil
+                                                    options:nil];
+    }
+    
+
     
     NSLog(@"*** Disconnected from device");
 }

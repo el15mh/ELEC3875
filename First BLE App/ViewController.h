@@ -55,12 +55,16 @@
 @property (weak, nonatomic) IBOutlet UILabel *xRotationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *yRotationLabel;
 
+@property (weak, nonatomic) IBOutlet UISwitch *scanSwitch;
+
 @property (strong, nonatomic) NSDictionary *accelerometerDictionary;
 
 #pragma mark - UIView Methods
 
 - (void) resumeScan;
 - (void) pauseScan;
+
+- (IBAction)scanSwitchPressed:(UISwitch *)sender;
 
 - (void) displayData:(NSData *)dataBytes
    forCharacteristic:(CBCharacteristic *)characteristic;

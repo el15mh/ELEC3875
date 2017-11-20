@@ -13,8 +13,8 @@
 
 #define PI 3.14159265
 
-#define DEG2RAD 3.141592/180
-#define RAD2DEG 180/3.14159
+#define DEG2RAD PI/180
+#define RAD2DEG 180/PI
 
 #define TIMER_SCAN_INTERVAL     2
 #define TIMER_PAUSE_INTERVAL    5
@@ -27,6 +27,8 @@
 
 #define UUID_BATTERY_SERVICE            @"0x180F"
 #define UUID_BATTERY_LEVEL_STATE_CHAR   @"0x2A1B"
+
+//#define UUID_UART_SERVICE               @
 
 #define UUID_HEART_RATE_SERVICE         @"0x180D"
 #define UUID_HR_CHARACTERISTIC          @"0x2A37"

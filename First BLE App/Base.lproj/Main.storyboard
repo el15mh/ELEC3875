@@ -13,7 +13,6 @@
         <!--Details-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController title="Details" id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
@@ -107,6 +106,23 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3l2-gA-C4r">
+                                <rect key="frame" x="310" y="503" width="51" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="49" id="BKU-Ir-rvD"/>
+                                    <constraint firstAttribute="height" constant="31" id="a0Z-Lu-cdf"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="scanSwitchPressed:" destination="BYZ-38-t0r" eventType="valueChanged" id="dud-Te-vab"/>
+                                </connections>
+                            </switch>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bluetooth-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="JDq-L0-lkU">
+                                <rect key="frame" x="252" y="493" width="70" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="Epu-MP-NcL"/>
+                                    <constraint firstAttribute="height" constant="51" id="fgK-3b-oYC"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -125,6 +141,7 @@
                             <constraint firstItem="3ZM-KC-ZKZ" firstAttribute="top" secondItem="dvy-CP-apv" secondAttribute="bottom" constant="5" id="NK3-gL-J07"/>
                             <constraint firstItem="fB8-sM-AGm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="OUd-dr-cfP"/>
                             <constraint firstItem="dvy-CP-apv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="Oct-lr-fbQ"/>
+                            <constraint firstItem="FH2-eh-Q0f" firstAttribute="top" secondItem="3l2-gA-C4r" secondAttribute="bottom" constant="10" id="Sz8-tt-6ya"/>
                             <constraint firstItem="3ZM-KC-ZKZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="TUQ-T3-4ei"/>
                             <constraint firstItem="ZQ7-PK-3pr" firstAttribute="leading" secondItem="O7n-jR-9tg" secondAttribute="leading" id="TkH-mJ-Gx5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3ZM-KC-ZKZ" secondAttribute="trailing" id="ULd-xA-BHE"/>
@@ -136,9 +153,12 @@
                             <constraint firstItem="cZ7-bD-xQq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="aqf-wb-D9M"/>
                             <constraint firstAttribute="trailingMargin" secondItem="dvy-CP-apv" secondAttribute="trailing" id="e79-aq-LxG"/>
                             <constraint firstItem="FAK-YT-MGN" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="eMt-mm-0mI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3l2-gA-C4r" secondAttribute="trailing" id="fUU-vY-5PQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="AWX-Ya-5dH" secondAttribute="bottom" constant="10" id="fmz-ho-b7d"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="yB2-aM-KdZ" secondAttribute="bottom" constant="10" id="fvo-8D-6LO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="JDq-L0-lkU" secondAttribute="trailing" constant="37" id="gEN-x6-apg"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FH2-eh-Q0f" secondAttribute="trailing" id="lFd-XQ-ao5"/>
+                            <constraint firstItem="FH2-eh-Q0f" firstAttribute="top" secondItem="JDq-L0-lkU" secondAttribute="bottom" id="t1m-L2-n8J"/>
                             <constraint firstItem="FAK-YT-MGN" firstAttribute="top" secondItem="cZ7-bD-xQq" secondAttribute="bottom" constant="10" id="uTY-GD-o2a"/>
                             <constraint firstItem="ZQ7-PK-3pr" firstAttribute="top" secondItem="O7n-jR-9tg" secondAttribute="bottom" constant="5" id="vcb-Ha-3CN"/>
                             <constraint firstItem="DQO-K8-xXh" firstAttribute="top" secondItem="ZQ7-PK-3pr" secondAttribute="bottom" constant="5" id="viu-By-6PZ"/>
@@ -161,6 +181,7 @@
                         <outlet property="metatarsalLabel" destination="XW3-5s-d4Q" id="yQV-5S-Cw7"/>
                         <outlet property="navicularLabel" destination="cZ7-bD-xQq" id="fZi-wJ-561"/>
                         <outlet property="phalangeLabel" destination="fB8-sM-AGm" id="TTa-Yy-qa3"/>
+                        <outlet property="scanSwitch" destination="3l2-gA-C4r" id="DcK-c8-VyF"/>
                         <outlet property="sexLabel" destination="O7n-jR-9tg" id="cf4-XJ-MgJ"/>
                         <outlet property="statusLabelOne" destination="FH2-eh-Q0f" id="6Jq-iR-y5b"/>
                         <outlet property="statusLabelTwo" destination="AWX-Ya-5dH" id="fJx-fq-yjc"/>
@@ -170,6 +191,7 @@
                         <outlet property="yRotationLabel" destination="yB2-aM-KdZ" id="hFN-rs-hlY"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6631.1999999999998" y="138.98050974512745"/>
         </scene>
@@ -965,6 +987,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bluetooth-logo.png" width="1200" height="880"/>
         <image name="FootIcon" width="25" height="25"/>
         <image name="FormIcon" width="25" height="25"/>
         <image name="FormIcon.png" width="25" height="25"/>

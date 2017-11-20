@@ -70,6 +70,7 @@
 		4463F9C71F4F21FC00B81963 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		4463F9CC1F4F4A6B00B81963 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
 		4463F9CD1F4F4A6B00B81963 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
+		44AB91351FC3657D007E414F /* Bluetooth-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bluetooth-logo.png"; path = "../../../../Downloads/Bluetooth-logo.png"; sourceTree = "<group>"; };
 		44B290201F55AAF700F995FC /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneKitViewController.h; path = ../SceneKitViewController.h; sourceTree = "<group>"; };
 		44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneKitViewController.m; path = ../SceneKitViewController.m; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 		4448DDB01F45AC2500A24D62 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44AB91351FC3657D007E414F /* Bluetooth-logo.png */,
 				44FD72E71F5ABB420003664E /* MotionAnalysisIcons */,
 				44D48FA21F7A9FF0005E9AD4 /* boneOutline.png */,
 				4448DDB11F45AC2500A24D62 /* main.m */,
