@@ -175,6 +175,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="3ZM-KC-ZKZ" id="Hfk-HT-S3u"/>
+                        <outlet property="bluetoothLogo" destination="JDq-L0-lkU" id="vtX-0z-0lK"/>
                         <outlet property="calcaneusLabel" destination="FAK-YT-MGN" id="nM3-L2-peT"/>
                         <outlet property="fibulaLabel" destination="zb0-4N-7pU" id="DHr-qZ-GuG"/>
                         <outlet property="heightLabel" destination="ZQ7-PK-3pr" id="MMh-mD-XNz"/>

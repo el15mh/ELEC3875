@@ -56,6 +56,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *yRotationLabel;
 
 @property (weak, nonatomic) IBOutlet UISwitch *scanSwitch;
+@property (weak, nonatomic) IBOutlet UIImageView *bluetoothLogo;
 
 @property (strong, nonatomic) NSDictionary *accelerometerDictionary;
 

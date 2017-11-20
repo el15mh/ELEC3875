@@ -58,7 +58,9 @@
     self.statusLabelOne.text = @"";
     self.statusLabelTwo.text = @"";
     self.connected = false;
-        
+    
+    [self.bluetoothLogo setHidden:false];
+    
     NSTimer *updateValuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
                                                          target:self
                                                        selector:@selector(sendNotifications)
@@ -249,6 +251,12 @@
     
 }
 
+- (IBAction)scanSwitchPressed:(UISwitch *)sender {
+    
+    if (sender.isOn) [self resumeScan];
+    else [self pauseScan];
+}
+
 - (void) pauseScan
 {
     // Scanning uses phone battery, so pause the scan process for the designated interval
@@ -262,14 +270,6 @@
     
     if (self.connected) self.statusLabelOne.text = [NSString stringWithFormat:@"Connected to: %@", self.peripheral.name];
 }
-
-- (IBAction)scanSwitchPressed:(UISwitch *)sender {
-    
-    if (sender.isOn) [self resumeScan];
-    else [self pauseScan];
-}
-
-
 
 - (void) resumeScan
 {
@@ -383,12 +383,10 @@
             self.peripheral = peripheral;
             self.peripheral.delegate = self;
             
-            [self.centralManager connectPeripheral:self.peripheral
+            [self.centralManager connectPeripheral:peripheral
                                            options:nil];
         }
     }
-    
-    //NSLog(@"No. of devices found: %ld", (long)[self.bleDevicesArray count]);
 }
 
 
@@ -401,9 +399,7 @@
     
     [self.centralManager stopScan];
     
-    NSLog(@"*** Stopping scan");
     [peripheral discoverServices:nil];
-    NSLog(@"*** Discovering services...");
 }
 
 
@@ -455,8 +451,6 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
                                                     options:nil];
     }
     
-
-    
     NSLog(@"*** Disconnected from device");
 }
 
@@ -467,6 +461,7 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
     NSLog(@"Error discovering services: %@", [error localizedDescription]);
+    NSLog(@"Discovering services...");
     
     for (CBService *service in peripheral.services) {
         NSLog(@"Discovered service: %@", service);
@@ -479,6 +474,14 @@ didDiscoverServices:(NSError *)error
         
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
         {
+            [peripheral discoverCharacteristics:nil
+                                     forService:service];
+        }
+        
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_SERVICE]])
+        {
+            NSLog(@"Service found");
+            
             [peripheral discoverCharacteristics:nil
                                      forService:service];
         }
@@ -506,6 +509,10 @@ didDiscoverServices:(NSError *)error
                           forCharacteristic:characteristic];
             
             NSLog(@"Discovered characteristic: %@", characteristic.description);
+        }
+        
+        else {
+            NSLog(@"UUID = %@", characteristic.UUID);
         }
     }
 }
