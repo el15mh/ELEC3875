@@ -249,6 +249,18 @@
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }
     
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
+    {
+        unsigned result;
+        
+        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
+        NSScanner *scanner = [NSScanner scannerWithString:data];
+        
+        [scanner setScanLocation:1];
+        [scanner scanHexInt:&result];
+        
+        self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
+    }
 }
 
 - (IBAction)scanSwitchPressed:(UISwitch *)sender {
@@ -511,8 +523,12 @@ didDiscoverServices:(NSError *)error
             NSLog(@"Discovered characteristic: %@", characteristic.description);
         }
         
-        else {
-            NSLog(@"UUID = %@", characteristic.UUID);
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
+        {
+            [self.peripheral setNotifyValue:YES
+                          forCharacteristic:characteristic];
+            
+            NSLog(@"Discovered characteristic: %@", characteristic.description);
         }
     }
 }
@@ -543,6 +559,12 @@ didDiscoverServices:(NSError *)error
     }
 
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
+    {
+        [self   displayData:characteristic.value
+          forCharacteristic:characteristic];
+    }
+    
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
     {
         [self   displayData:characteristic.value
           forCharacteristic:characteristic];
