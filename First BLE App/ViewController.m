@@ -253,11 +253,15 @@
     {
         unsigned result;
         
-        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
+        NSString *data = [[NSString alloc] initWithData:characteristic.value
+                                               encoding:NSUTF8StringEncoding];
+        
         NSScanner *scanner = [NSScanner scannerWithString:data];
         
         [scanner setScanLocation:1];
         [scanner scanHexInt:&result];
+        
+        NSLog(@"size of data: %ld", sizeof(data));
         
         self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %@", data];
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
