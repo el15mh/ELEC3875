@@ -15,7 +15,7 @@
 - (void) initModel
 {
     self.userName = @"Max Houghton";
-    self.age = 20;
+    self.age = 21;
     self.gender = MALE;
     self.height = 180;
     self.weight = 75;

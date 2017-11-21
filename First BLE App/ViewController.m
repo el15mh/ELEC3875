@@ -209,62 +209,12 @@
 - (void) displayData:(NSData *)dataBytes
    forCharacteristic:(CBCharacteristic *)characteristic
 {
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
     {
-        NSUInteger length = dataBytes.length;
-        uint32_t dataArray[length];
-        
-        for (int i = 0; i < length; i++) dataArray[i] = 0;
-        
-        [dataBytes getBytes:&dataArray
-                     length:length * sizeof(uint16_t)];
-        
-        uint32_t rawData = dataArray[1] + dataArray[0];
-        
-        double data = (double)rawData / 25600;
-        
-        data -= 90;
-        
-        self.xRotationLabel.text = [NSString stringWithFormat:@"X Axis: %f", data];
-        self.model.device1.rotation_x = data;
-        
-        //NSLog(@"%x", *dataArray);
-        //NSLog(@"data = %i", (int)data);
-    }
-    
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
-    {
-        unsigned result = 0;
-        
-        // Create data string by casting hex value from characteristic to a string
-        NSString *data = [NSString stringWithFormat:@"%@", (NSString *)characteristic.value];
-        NSScanner *scanner = [NSScanner scannerWithString:data];
-        
-        [scanner setScanLocation:1];
-        [scanner scanHexInt:&result];
-        
-        result -= 90;
-        self.model.device1.rotation_y = result;
-        
-        self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
-    }
-    
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
-    {
-        unsigned result;
-        
         NSString *data = [[NSString alloc] initWithData:characteristic.value
                                                encoding:NSUTF8StringEncoding];
-        
-        NSScanner *scanner = [NSScanner scannerWithString:data];
-        
-        [scanner setScanLocation:1];
-        [scanner scanHexInt:&result];
-        
-        NSLog(@"size of data: %ld", sizeof(data));
-        
+    
         self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %@", data];
-        self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }
 }
 
@@ -477,28 +427,13 @@ didDisconnectPeripheral:(CBPeripheral *)peripheral
 - (void) peripheral:(CBPeripheral *)peripheral
 didDiscoverServices:(NSError *)error
 {
-    NSLog(@"Error discovering services: %@", [error localizedDescription]);
-    NSLog(@"Discovering services...");
+    if (error) NSLog(@"Error discovering services: %@", [error localizedDescription]);
     
     for (CBService *service in peripheral.services) {
         NSLog(@"Discovered service: %@", service);
         
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEALTH_THERMOMETER_SERVICE]])
-        {
-            [peripheral discoverCharacteristics:nil
-                                     forService:service];
-        }
-        
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_HEART_RATE_SERVICE]])
-        {
-            [peripheral discoverCharacteristics:nil
-                                     forService:service];
-        }
-        
         if ([service.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_SERVICE]])
         {
-            NSLog(@"Service found");
-            
             [peripheral discoverCharacteristics:nil
                                      forService:service];
         }
@@ -511,29 +446,13 @@ didDiscoverServices:(NSError *)error
                                  error:(NSError *)error
 {
     for (CBCharacteristic *characteristic in service.characteristics) {
-        
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-        {
-            [self.peripheral setNotifyValue:YES
-                          forCharacteristic:characteristic];
-            
-            NSLog(@"Discovered characteristic: %@", characteristic.description);
-        }
-        
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
-        {
-            [self.peripheral setNotifyValue:YES
-                          forCharacteristic:characteristic];
-            
-            NSLog(@"Discovered characteristic: %@", characteristic.description);
-        }
+    
+        NSLog(@"Discovered characteristic: %@", characteristic.description);
         
         if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
         {
             [self.peripheral setNotifyValue:YES
                           forCharacteristic:characteristic];
-            
-            NSLog(@"Discovered characteristic: %@", characteristic.description);
         }
     }
 }
@@ -557,20 +476,10 @@ didDiscoverServices:(NSError *)error
         return;
     }
     
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_TEMPERATURE_CHARACTERISTIC]])
-    {
-        [self   displayData:characteristic.value
-          forCharacteristic:characteristic];
-    }
-
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_HR_CHARACTERISTIC]])
-    {
-        [self   displayData:characteristic.value
-          forCharacteristic:characteristic];
-    }
-    
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
     {
+        NSLog(@"Discovered UART characteristic");
+        
         [self   displayData:characteristic.value
           forCharacteristic:characteristic];
     }
