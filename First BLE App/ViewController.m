@@ -259,6 +259,7 @@
         [scanner setScanLocation:1];
         [scanner scanHexInt:&result];
         
+        self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %@", data];
         self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %i", result];
     }
 }
