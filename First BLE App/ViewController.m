@@ -215,32 +215,22 @@
         NSString *data = [[NSString alloc] initWithData:characteristic.value
                                                encoding:NSUTF8StringEncoding];
         
-        const char *c = [data UTF8String];
-        unsigned int x = (unsigned int)c[0];
-        unsigned int y = (unsigned int)c[1];
-        unsigned int z = (unsigned int)c[2];
-        unsigned int w = (unsigned int)c[3];
+        NSString *temp = [data substringToIndex:4];
+        NSInteger value = [temp intValue];
         
-        //NSLog(@"string: %@", data);
-        NSLog(@"x: %u, y: %u, z: %u, w: %u", x, y, w, z);
-        
-        /*
-        if ((NSInteger)c == 0xFF) {
+        if (value == 255) {
             self.counter = 0;
+            self.counter++;
+            return;
+        } else if (self.counter == 1) {
+            self.xRotationLabel.text = [NSString stringWithFormat:@"%d", value];
+            self.counter++;
+            return;
+        } else if (self.counter == 2) {
+            self.yRotationLabel.text = [NSString stringWithFormat:@"%d", value];
+            self.counter++;
             return;
         }
-        else if (self.counter == 1) {
-            self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %s", c];
-        }
-        else if (self.counter == 2) {
-            self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %s", c];
-        }
-        else if (self.counter == 3) {
-            NSLog(@"Z axis: %s", c);
-        }
-         */
-        
-        self.counter++;
     }
 }
 
