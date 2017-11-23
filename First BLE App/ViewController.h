@@ -35,6 +35,8 @@
 @property (nonatomic, assign) BOOL scan;
 @property (nonatomic, assign) BOOL connected;
 
+@property NSInteger counter;
+
 #pragma mark - UIView Properties
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;

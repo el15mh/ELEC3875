@@ -60,6 +60,7 @@
     self.connected = false;
     
     [self.bluetoothLogo setHidden:false];
+    self.counter = 0;
     
     NSTimer *updateValuesTimer = [NSTimer timerWithTimeInterval:UPDATE_VALUES_INTERVAL
                                                          target:self
@@ -213,8 +214,33 @@
     {
         NSString *data = [[NSString alloc] initWithData:characteristic.value
                                                encoding:NSUTF8StringEncoding];
-    
-        self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %@", data];
+        
+        const char *c = [data UTF8String];
+        unsigned int x = (unsigned int)c[0];
+        unsigned int y = (unsigned int)c[1];
+        unsigned int z = (unsigned int)c[2];
+        unsigned int w = (unsigned int)c[3];
+        
+        //NSLog(@"string: %@", data);
+        NSLog(@"x: %u, y: %u, z: %u, w: %u", x, y, w, z);
+        
+        /*
+        if ((NSInteger)c == 0xFF) {
+            self.counter = 0;
+            return;
+        }
+        else if (self.counter == 1) {
+            self.xRotationLabel.text = [NSString stringWithFormat:@"X axis: %s", c];
+        }
+        else if (self.counter == 2) {
+            self.yRotationLabel.text = [NSString stringWithFormat:@"Y axis: %s", c];
+        }
+        else if (self.counter == 3) {
+            NSLog(@"Z axis: %s", c);
+        }
+         */
+        
+        self.counter++;
     }
 }
 
@@ -478,8 +504,6 @@ didDiscoverServices:(NSError *)error
     
     else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUID_UART_RX_CHARACTERISTIC]])
     {
-        NSLog(@"Discovered UART characteristic");
-        
         [self   displayData:characteristic.value
           forCharacteristic:characteristic];
     }
