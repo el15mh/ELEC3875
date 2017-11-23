@@ -218,19 +218,18 @@
         NSString *temp = [data substringToIndex:4];
         NSInteger value = [temp intValue];
         
-        if (value == 255) {
-            self.counter = 0;
-            self.counter++;
-            return;
-        } else if (self.counter == 1) {
-            self.xRotationLabel.text = [NSString stringWithFormat:@"%d", value];
-            self.counter++;
-            return;
-        } else if (self.counter == 2) {
-            self.yRotationLabel.text = [NSString stringWithFormat:@"%d", value];
-            self.counter++;
-            return;
+        if (value >= 240) {
+            self.counter = value - 240;
         }
+        
+        if (self.counter == 0) {
+            self.model.device1.rotation_x = value;
+        } else if (self.counter == 1) {
+            self.model.device1.rotation_y = value - 1;
+        }
+        
+        self.xRotationLabel.text = [NSString stringWithFormat:@"%d", self.model.device1.rotation_x];
+        self.yRotationLabel.text = [NSString stringWithFormat:@"%d", self.model.device1.rotation_y];
     }
 }
 
