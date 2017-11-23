@@ -112,7 +112,7 @@
     float phalangeX = self.model.phalange.currentXRotation;
     float metatarsalX = self.model.metatarsal.currentXRotation;
     
-    metatarsalX += [self.model calculateRotation:(self.model.phalange.currentXRotation + METATARSAL_X_OFFSET)
+    metatarsalX += [self.model calculateRotation:(self.model.device1.rotation_x + METATARSAL_X_OFFSET)
                                           onAxis:@"x"
                                          forBone:self.model.metatarsal];
     
@@ -147,7 +147,7 @@
     self.deviceOneLabel.text = [NSString stringWithFormat:@"Device 1: x: %@, y: %@, z: %@", x1_value, y1_value, z1_value];
     self.deviceTwoLabel.text = [NSString stringWithFormat:@"Device 2: x: %@, y: %@, z: %@", x2_value, y2_value, z2_value];
     
-    self.model.device1.rotation_x = [x1_value floatValue];
+    self.model.device1.rotation_x = [x1_value floatValue] * (-1.0f);
     self.model.device1.rotation_y = [y1_value floatValue];
     self.model.device1.rotation_z = [z1_value floatValue];
     self.model.device2.rotation_x = [x2_value floatValue];
