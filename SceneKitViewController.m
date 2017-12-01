@@ -96,9 +96,7 @@
                                              selector:@selector(receiveAccelerometerValues:)
                                                  name:@"AccelerometerValues"
                                                object:nil];
-    
-    NSLog(@"initial metatarsal rotation: %ld", (long)self.metatarsalNode.rotation.x);
-}
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
