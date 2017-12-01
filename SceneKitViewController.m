@@ -112,15 +112,15 @@
     float phalangeX = self.model.phalange.currentXRotation;
     float metatarsalX = self.model.metatarsal.currentXRotation;
     
-    metatarsalX += [self.model calculateRotation:(self.model.device1.rotation_x + METATARSAL_X_OFFSET)
+    metatarsalX += [self.model calculateRotation:(self.model.acc1.rotation_x + METATARSAL_X_OFFSET)
                                           onAxis:@"x"
                                          forBone:self.model.metatarsal];
     
-    phalangeX += [self.model calculateRotation:self.model.device1.rotation_x
+    phalangeX += [self.model calculateRotation:self.model.acc1.rotation_x
                                         onAxis:@"x"
                                        forBone:self.model.phalange];
     
-    calcaneusX += [self.model calculateRotation:self.model.device1.rotation_x
+    calcaneusX += [self.model calculateRotation:self.model.acc1.rotation_x
                                          onAxis:@"x"
                                         forBone:self.model.calcaneus];
     
@@ -137,22 +137,22 @@
 {
     NSDictionary *accelerometerInfo = accelerometerDictionary.userInfo;
     
-    NSNumber *x1_value = (NSNumber *)accelerometerInfo[@"x_1"];
-    NSNumber *y1_value = (NSNumber *)accelerometerInfo[@"y_1"];
-    NSNumber *z1_value = (NSNumber *)accelerometerInfo[@"z_1"];
-    NSNumber *x2_value = (NSNumber *)accelerometerInfo[@"x_2"];
-    NSNumber *y2_value = (NSNumber *)accelerometerInfo[@"y_2"];
-    NSNumber *z2_value = (NSNumber *)accelerometerInfo[@"z_2"];
+    NSNumber *acc1x_value = (NSNumber *)accelerometerInfo[@"x_1"];
+    NSNumber *acc1y_value = (NSNumber *)accelerometerInfo[@"y_1"];
+    NSNumber *acc1z_value = (NSNumber *)accelerometerInfo[@"z_1"];
+    NSNumber *acc2x_value = (NSNumber *)accelerometerInfo[@"x_2"];
+    NSNumber *acc2y_value = (NSNumber *)accelerometerInfo[@"y_2"];
+    NSNumber *acc2z_value = (NSNumber *)accelerometerInfo[@"z_2"];
     
-    self.deviceOneLabel.text = [NSString stringWithFormat:@"Device 1: x: %@, y: %@, z: %@", x1_value, y1_value, z1_value];
-    self.deviceTwoLabel.text = [NSString stringWithFormat:@"Device 2: x: %@, y: %@, z: %@", x2_value, y2_value, z2_value];
+    self.deviceOneLabel.text = [NSString stringWithFormat:@"Device 1: x: %@, y: %@, z: %@", acc1x_value, acc1y_value, acc1z_value];
+    self.deviceTwoLabel.text = [NSString stringWithFormat:@"Device 2: x: %@, y: %@, z: %@", acc2x_value, acc2y_value, acc2z_value];
     
-    self.model.device1.rotation_x = [x1_value floatValue] * (-1.0f);
-    self.model.device1.rotation_y = [y1_value floatValue];
-    self.model.device1.rotation_z = [z1_value floatValue];
-    self.model.device2.rotation_x = [x2_value floatValue];
-    self.model.device2.rotation_y = [y2_value floatValue];
-    self.model.device2.rotation_z = [z2_value floatValue];
+    self.model.acc1.rotation_x = [acc1x_value floatValue] * (-1.0f);
+    self.model.acc1.rotation_y = [acc1y_value floatValue];
+    self.model.acc1.rotation_z = [acc1z_value floatValue];
+    self.model.acc2.rotation_x = [acc2x_value floatValue];
+    self.model.acc2.rotation_y = [acc2y_value floatValue];
+    self.model.acc2.rotation_z = [acc2z_value floatValue];
 }
 
 - (BOOL) shouldAutorotate
@@ -173,12 +173,12 @@
     self.model.phalange.currentXRotation = 0.0f;
     self.model.metatarsal.currentXRotation = 0.0f;
     
-    self.model.device1.rotation_x -= self.model.device1.rotation_x;
-    self.model.device1.rotation_y -= self.model.device1.rotation_y;
-    self.model.device1.rotation_z -= self.model.device1.rotation_z;
-    self.model.device2.rotation_x -= self.model.device2.rotation_x;
-    self.model.device2.rotation_y -= self.model.device2.rotation_y;
-    self.model.device2.rotation_z -= self.model.device2.rotation_z;
+    self.model.acc1.rotation_x -= self.model.acc1.rotation_x;
+    self.model.acc1.rotation_y -= self.model.acc1.rotation_y;
+    self.model.acc1.rotation_z -= self.model.acc1.rotation_z;
+    self.model.acc2.rotation_x -= self.model.acc2.rotation_x;
+    self.model.acc2.rotation_y -= self.model.acc2.rotation_y;
+    self.model.acc2.rotation_z -= self.model.acc2.rotation_z;
 }
 
 

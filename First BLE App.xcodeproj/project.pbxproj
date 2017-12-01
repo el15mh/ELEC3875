@@ -18,9 +18,10 @@
 		4448DDE51F45AC3300A24D62 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4448DDE41F45AC3300A24D62 /* CoreBluetooth.framework */; };
 		444F32151F6941CF00F3ADCB /* Bone.m in Sources */ = {isa = PBXBuildFile; fileRef = 444F32141F6941CF00F3ADCB /* Bone.m */; };
 		4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C41F4F1A0F00B81963 /* DataModel.m */; };
-		4463F9C81F4F21FC00B81963 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C71F4F21FC00B81963 /* Device.m */; };
+		4463F9C81F4F21FC00B81963 /* Accelerometer.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C71F4F21FC00B81963 /* Accelerometer.m */; };
 		4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9CD1F4F4A6B00B81963 /* TableViewController.m */; };
 		448BDC191FD18D41003B3015 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 448BDC181FD18D41003B3015 /* DataViewController.m */; };
+		448BDC1C1FD1C7E9003B3015 /* MLX90393.m in Sources */ = {isa = PBXBuildFile; fileRef = 448BDC1B1FD1C7E9003B3015 /* MLX90393.m */; };
 		44B290211F55AAF700F995FC /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B290201F55AAF700F995FC /* SceneKit.framework */; };
 		44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */; };
 		44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 44CE1D911F581C8E00CA79CE /* art.scnassets */; };
@@ -67,12 +68,14 @@
 		444F32141F6941CF00F3ADCB /* Bone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bone.m; sourceTree = "<group>"; };
 		4463F9C31F4F1A0F00B81963 /* DataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataModel.h; path = ../DataModel.h; sourceTree = "<group>"; };
 		4463F9C41F4F1A0F00B81963 /* DataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataModel.m; path = ../DataModel.m; sourceTree = "<group>"; };
-		4463F9C61F4F21FC00B81963 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
-		4463F9C71F4F21FC00B81963 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		4463F9C61F4F21FC00B81963 /* Accelerometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Accelerometer.h; sourceTree = "<group>"; };
+		4463F9C71F4F21FC00B81963 /* Accelerometer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Accelerometer.m; sourceTree = "<group>"; };
 		4463F9CC1F4F4A6B00B81963 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
 		4463F9CD1F4F4A6B00B81963 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
 		448BDC171FD18D41003B3015 /* DataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		448BDC181FD18D41003B3015 /* DataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
+		448BDC1A1FD1C7E9003B3015 /* MLX90393.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MLX90393.h; sourceTree = "<group>"; };
+		448BDC1B1FD1C7E9003B3015 /* MLX90393.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLX90393.m; sourceTree = "<group>"; };
 		44AB91351FC3657D007E414F /* Bluetooth-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bluetooth-logo.png"; path = "../../../../Downloads/Bluetooth-logo.png"; sourceTree = "<group>"; };
 		44B290201F55AAF700F995FC /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneKitViewController.h; path = ../SceneKitViewController.h; sourceTree = "<group>"; };
@@ -150,8 +153,10 @@
 				4463F9C41F4F1A0F00B81963 /* DataModel.m */,
 				444F32131F6941CF00F3ADCB /* Bone.h */,
 				444F32141F6941CF00F3ADCB /* Bone.m */,
-				4463F9C61F4F21FC00B81963 /* Device.h */,
-				4463F9C71F4F21FC00B81963 /* Device.m */,
+				4463F9C61F4F21FC00B81963 /* Accelerometer.h */,
+				4463F9C71F4F21FC00B81963 /* Accelerometer.m */,
+				448BDC1A1FD1C7E9003B3015 /* MLX90393.h */,
+				448BDC1B1FD1C7E9003B3015 /* MLX90393.m */,
 				4448DDBC1F45AC2500A24D62 /* Assets.xcassets */,
 				44CE1D911F581C8E00CA79CE /* art.scnassets */,
 				4448DDBE1F45AC2500A24D62 /* LaunchScreen.storyboard */,
@@ -343,8 +348,9 @@
 				4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */,
 				4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */,
 				4448DDB51F45AC2500A24D62 /* AppDelegate.m in Sources */,
+				448BDC1C1FD1C7E9003B3015 /* MLX90393.m in Sources */,
 				448BDC191FD18D41003B3015 /* DataViewController.m in Sources */,
-				4463F9C81F4F21FC00B81963 /* Device.m in Sources */,
+				4463F9C81F4F21FC00B81963 /* Accelerometer.m in Sources */,
 				444F32151F6941CF00F3ADCB /* Bone.m in Sources */,
 				44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */,
 				4448DDB21F45AC2500A24D62 /* main.m in Sources */,

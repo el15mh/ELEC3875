@@ -25,15 +25,32 @@
     self.navicular = [[Bone alloc] init];
     self.metatarsal = [[Bone alloc] init];
     self.phalange = [[Bone alloc] init];
-    
+        
     self.fibula.name = @"fibula";
     self.navicular.name = @"navicular";
     self.calcaneus.name = @"calcaneus";
     self.metatarsal.name = @"metatarsal";
     self.phalange.name = @"phalange";
     
-    self.device1 = [[Device alloc] init];
-    self.device2 = [[Device alloc] init];
+    self.acc1 = [[Accelerometer alloc] init];
+    self.acc2 = [[Accelerometer alloc] init];
+    
+    self.mlx1 = [[MLX90393 alloc] init];
+    self.mlx2 = [[MLX90393 alloc] init];
+    self.mlx3 = [[MLX90393 alloc] init];
+    self.mlx4 = [[MLX90393 alloc] init];
+    self.mlx5 = [[MLX90393 alloc] init];
+    self.mlx6 = [[MLX90393 alloc] init];
+    self.mlx7 = [[MLX90393 alloc] init];
+    self.mlx8 = [[MLX90393 alloc] init];
+    self.mlx9 = [[MLX90393 alloc] init];
+    self.mlx10 = [[MLX90393 alloc] init];
+    self.mlx11 = [[MLX90393 alloc] init];
+    self.mlx12 = [[MLX90393 alloc] init];
+    self.mlx13 = [[MLX90393 alloc] init];
+    self.mlx14 = [[MLX90393 alloc] init];
+    self.mlx15 = [[MLX90393 alloc] init];
+    self.mlx16 = [[MLX90393 alloc] init];
     
     self.fibula.length = 67;
     self.navicular.length = 25;
@@ -41,13 +58,13 @@
     self.metatarsal.length = 24;
     self.phalange.length = 15;
     
-    self.device1.rotation_x = 0;
-    self.device1.rotation_y = 0;
-    self.device1.rotation_z = 0;
+    self.acc1.rotation_x = 0;
+    self.acc1.rotation_y = 0;
+    self.acc1.rotation_z = 0;
     
-    self.device2.rotation_x = 0;
-    self.device2.rotation_y = 0;
-    self.device2.rotation_z = 0;
+    self.acc2.rotation_x = 0;
+    self.acc2.rotation_y = 0;
+    self.acc2.rotation_z = 0;
 }
 
 #pragma mark - Calculate

@@ -6,8 +6,8 @@
 //  Copyright © 2017 University of Leeds. All rights reserved.
 //
 
-#import "Device.h"
+#import "Accelerometer.h"
 
-@implementation Device
+@implementation Accelerometer
 
 @end

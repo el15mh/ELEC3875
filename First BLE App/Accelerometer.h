@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Device : NSObject
+@interface Accelerometer : NSObject
 
 @property NSInteger position;   // distance from ankle joint to each accelerometer
 

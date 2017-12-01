@@ -29,13 +29,6 @@
                                                              options:nil];
     
     // Initialize all values to 0
-    self.accelerometer_1.rotation_x = 0;
-    self.accelerometer_1.rotation_y = 0;
-    self.accelerometer_1.rotation_z = 0;
-    
-    self.accelerometer_2.rotation_x = 0;
-    self.accelerometer_2.rotation_y = 0;
-    self.accelerometer_2.rotation_z = 0;
     
     self.fibulaLabel.text = [NSString stringWithFormat:@"Fibula: %ld mm", (long)self.model.fibula.length];
     self.navicularLabel.text = [NSString stringWithFormat:@"Navicular: %ld mm", (long)self.model.navicular.length];
@@ -43,8 +36,8 @@
     self.metatarsalLabel.text = [NSString stringWithFormat:@"Metatarsal: %ld mm", (long)self.model.metatarsal.length];
     self.phalangeLabel.text = [NSString stringWithFormat:@"Phalanges: %ld mm", (long)self.model.phalange.length];
     
-    self.model.device1.position = 0;
-    self.model.device2.position = 0;
+    self.model.acc1.position = 0;
+    self.model.acc2.position = 0;
     
     self.userNameLabel.text = [NSString stringWithFormat:@"Name: %@", self.model.userName];
     self.ageLabel.text = [NSString stringWithFormat:@"Age: %ld", (long)self.model.age];
@@ -114,77 +107,94 @@
 
 #pragma mark - Pass Data Protocol Methods
 
-- (void) setName:(NSString *)name
-{
-    self.model.userName = name;
-}
-
-- (void) setAge:(NSInteger)age
-{
-    self.model.age = age;
-}
-
-- (void) setGender:(NSInteger)gender
-{
-    self.model.gender = gender;
-}
-
-- (void) setHeight:(NSInteger)height
-{
-    self.model.height = height;
-}
-
-- (void) setWeight:(NSInteger)weight
-{
-    self.model.weight = weight;
-}
-
-- (void) setA1:(NSInteger)A1Position
-{
-    self.model.device1.position = A1Position;
-}
-
-- (void) setA2:(NSInteger)A2Position
-{
-    self.model.device2.position = A2Position;
-}
-
-- (void) setFibula:(NSInteger)fibula
-{
-    self.model.fibula.length = fibula;
-}
-
-- (void) setCalcaneus:(NSInteger)calcaneus
-{
-    self.model.calcaneus.length = calcaneus;
-}
-
-- (void) setNavicular:(NSInteger)navicular
-{
-    self.model.navicular.length = navicular;
-}
-
-- (void) setMetatarsal:(NSInteger)metatarsal
-{
-    self.model.metatarsal.length = metatarsal;
-}
-
-- (void) setPhalange:(NSInteger)phalange
-{
-    self.model.phalange.length = phalange;
-}
+- (void) setName:(NSString *)name           { self.model.userName = name; }
+- (void) setAge:(NSInteger)age              { self.model.age = age; }
+- (void) setGender:(NSInteger)gender        { self.model.gender = gender; }
+- (void) setHeight:(NSInteger)height        { self.model.height = height; }
+- (void) setWeight:(NSInteger)weight        { self.model.weight = weight; }
+- (void) setA1:(NSInteger)A1Position        {  self.model.acc1.position = A1Position; }
+- (void) setA2:(NSInteger)A2Position        { self.model.acc2.position = A2Position; }
+- (void) setFibula:(NSInteger)fibula        {  self.model.fibula.length = fibula; }
+- (void) setCalcaneus:(NSInteger)calcaneus  { self.model.calcaneus.length = calcaneus; }
+- (void) setNavicular:(NSInteger)navicular  { self.model.navicular.length = navicular; }
+- (void) setMetatarsal:(NSInteger)metatarsal{ self.model.metatarsal.length = metatarsal; }
+- (void) setPhalange:(NSInteger)phalange    { self.model.phalange.length = phalange; }
 
 #pragma mark - Setup Notifications
 
 - (void) sendNotifications
 {
     // Send accelerometer values using NSNumber instances (compatible with NSDictionary)
-    NSNumber *x_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_x];
-    NSNumber *y_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_y];
-    NSNumber *z_device1 = [NSNumber numberWithInteger:self.model.device1.rotation_z];
-    NSNumber *x_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_x];
-    NSNumber *y_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_y];
-    NSNumber *z_device2 = [NSNumber numberWithInteger:self.model.device2.rotation_z];
+    NSNumber *x_device1 = [NSNumber numberWithInteger:self.model.acc1.rotation_x];
+    NSNumber *y_device1 = [NSNumber numberWithInteger:self.model.acc1.rotation_y];
+    NSNumber *z_device1 = [NSNumber numberWithInteger:self.model.acc1.rotation_z];
+    NSNumber *x_device2 = [NSNumber numberWithInteger:self.model.acc2.rotation_x];
+    NSNumber *y_device2 = [NSNumber numberWithInteger:self.model.acc2.rotation_y];
+    NSNumber *z_device2 = [NSNumber numberWithInteger:self.model.acc2.rotation_z];
+    
+    NSNumber *x1 = [NSNumber numberWithInteger:self.model.mlx1.x];
+    NSNumber *y1 = [NSNumber numberWithInteger:self.model.mlx1.y];
+    NSNumber *z1 = [NSNumber numberWithInteger:self.model.mlx1.z];
+    
+    NSNumber *x2 = [NSNumber numberWithInteger:self.model.mlx2.x];
+    NSNumber *y2 = [NSNumber numberWithInteger:self.model.mlx2.y];
+    NSNumber *z2 = [NSNumber numberWithInteger:self.model.mlx2.z];
+    
+    NSNumber *x3 = [NSNumber numberWithInteger:self.model.mlx3.x];
+    NSNumber *y3 = [NSNumber numberWithInteger:self.model.mlx3.y];
+    NSNumber *z3 = [NSNumber numberWithInteger:self.model.mlx3.z];
+    
+    NSNumber *x4 = [NSNumber numberWithInteger:self.model.mlx4.x];
+    NSNumber *y4 = [NSNumber numberWithInteger:self.model.mlx4.y];
+    NSNumber *z4 = [NSNumber numberWithInteger:self.model.mlx4.z];
+
+    NSNumber *x5 = [NSNumber numberWithInteger:self.model.mlx5.x];
+    NSNumber *y5 = [NSNumber numberWithInteger:self.model.mlx5.y];
+    NSNumber *z5 = [NSNumber numberWithInteger:self.model.mlx5.z];
+    
+    NSNumber *x6 = [NSNumber numberWithInteger:self.model.mlx6.x];
+    NSNumber *y6 = [NSNumber numberWithInteger:self.model.mlx6.y];
+    NSNumber *z6 = [NSNumber numberWithInteger:self.model.mlx6.z];
+    
+    NSNumber *x7 = [NSNumber numberWithInteger:self.model.mlx7.x];
+    NSNumber *y7 = [NSNumber numberWithInteger:self.model.mlx7.y];
+    NSNumber *z7 = [NSNumber numberWithInteger:self.model.mlx7.z];
+    
+    NSNumber *x8 = [NSNumber numberWithInteger:self.model.mlx8.x];
+    NSNumber *y8 = [NSNumber numberWithInteger:self.model.mlx8.y];
+    NSNumber *z8 = [NSNumber numberWithInteger:self.model.mlx8.z];
+    
+    NSNumber *x9 = [NSNumber numberWithInteger:self.model.mlx9.x];
+    NSNumber *y9 = [NSNumber numberWithInteger:self.model.mlx9.y];
+    NSNumber *z9 = [NSNumber numberWithInteger:self.model.mlx9.z];
+    
+    NSNumber *x10 = [NSNumber numberWithInteger:self.model.mlx10.x];
+    NSNumber *y10 = [NSNumber numberWithInteger:self.model.mlx10.y];
+    NSNumber *z10 = [NSNumber numberWithInteger:self.model.mlx10.z];
+    
+    NSNumber *x11 = [NSNumber numberWithInteger:self.model.mlx11.x];
+    NSNumber *y11 = [NSNumber numberWithInteger:self.model.mlx11.y];
+    NSNumber *z11 = [NSNumber numberWithInteger:self.model.mlx11.z];
+    
+    NSNumber *x12 = [NSNumber numberWithInteger:self.model.mlx12.x];
+    NSNumber *y12 = [NSNumber numberWithInteger:self.model.mlx12.y];
+    NSNumber *z12 = [NSNumber numberWithInteger:self.model.mlx12.z];
+    
+    NSNumber *x13 = [NSNumber numberWithInteger:self.model.mlx13.x];
+    NSNumber *y13 = [NSNumber numberWithInteger:self.model.mlx13.y];
+    NSNumber *z13 = [NSNumber numberWithInteger:self.model.mlx13.z];
+    
+    NSNumber *x14 = [NSNumber numberWithInteger:self.model.mlx14.x];
+    NSNumber *y14 = [NSNumber numberWithInteger:self.model.mlx14.y];
+    NSNumber *z14 = [NSNumber numberWithInteger:self.model.mlx14.z];
+    
+    NSNumber *x15 = [NSNumber numberWithInteger:self.model.mlx15.x];
+    NSNumber *y15 = [NSNumber numberWithInteger:self.model.mlx15.y];
+    NSNumber *z15 = [NSNumber numberWithInteger:self.model.mlx15.z];
+    
+    NSNumber *x16 = [NSNumber numberWithInteger:self.model.mlx16.x];
+    NSNumber *y16 = [NSNumber numberWithInteger:self.model.mlx16.y];
+    NSNumber *z16 = [NSNumber numberWithInteger:self.model.mlx16.z];
     
     // Store keys/values in dictionary property of class.
     self.accelerometerDictionary = @{@"x_1": x_device1,
@@ -194,15 +204,34 @@
                                      @"y_2": y_device2,
                                      @"z_2": z_device2};
     
+    self.magTrixDictionary = @{@"mlx1_x": x1, @"mlx1_y": y1, @"mlx1_z": z1,
+                               @"mlx2_x": x2, @"mlx2_y": y2, @"mlx2_z": z2,
+                               @"mlx3_x": x3, @"mlx3_y": y3, @"mlx3_z": z3,
+                               @"mlx4_x": x4, @"mlx4_y": y4, @"mlx4_z": z4,
+                               @"mlx5_x": x5, @"mlx5_y": y5, @"mlx5_z": z5,
+                               @"mlx6_x": x6, @"mlx6_y": y6, @"mlx6_z": z6,
+                               @"mlx7_x": x7, @"mlx7_y": y7, @"mlx7_z": z7,
+                               @"mlx8_x": x8, @"mlx8_y": y8, @"mlx8_z": z8,
+                               @"mlx9_x": x9, @"mlx9_y": y9, @"mlx9_z": z9,
+                               @"mlx10_x": x10, @"mlx10_y": y10, @"mlx10_z": z10,
+                               @"mlx11_x": x11, @"mlx11_y": y11, @"mlx11_z": z11,
+                               @"mlx12_x": x12, @"mlx12_y": y12, @"mlx12_z": z12,
+                               @"mlx13_x": x13, @"mlx13_y": y13, @"mlx13_z": z13,
+                               @"mlx14_x": x14, @"mlx14_y": y14, @"mlx14_z": z14,
+                               @"mlx15_x": x15, @"mlx15_y": y15, @"mlx15_z": z15,
+                               @"mlx16_x": x16, @"mlx16_y": y16, @"mlx16_z": z16};
+    
     // Create notification centre instance to be used to send data
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     
-    // Start posting notifications containing accelerometer data
+    // Start posting notifications containing data
     [nc postNotificationName:@"AccelerometerValues"
                       object:self
                     userInfo:self.accelerometerDictionary];
     
-    //NSLog(@"number of table rows: %ld", (long)self.tableView.numberOfSections);
+    [nc postNotificationName:@"MagTrixValues"
+                      object:self
+                    userInfo:self.magTrixDictionary];
 }
 
 #pragma mark - Updating the GUI
@@ -228,13 +257,13 @@
         }
         
         if (self.counter == 1) {
-            self.model.device1.rotation_x = (value - 125.0f) * 0.72f;
+            self.model.acc1.rotation_x = (value - 125.0f) * 0.72f;
         } else if (self.counter == 2) {
-            self.model.device1.rotation_y = (value - 125.0f) * 0.72f;
+            self.model.acc1.rotation_y = (value - 125.0f) * 0.72f;
         }
         
-        self.xRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.device1.rotation_x];
-        self.yRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.device1.rotation_y];
+        self.xRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_x];
+        self.yRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_y];
         
         self.counter++;
         if (self.counter > 2) self.counter = 0;

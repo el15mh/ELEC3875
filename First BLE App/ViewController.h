@@ -23,8 +23,6 @@
 #pragma mark - Model objects
 
 @property (strong, nonatomic) DataModel *model;
-@property (strong, nonatomic) Device *accelerometer_1;
-@property (strong, nonatomic) Device *accelerometer_2;
 
 #pragma mark - BLE Objects/Properties
 
@@ -61,6 +59,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bluetoothLogo;
 
 @property (strong, nonatomic) NSDictionary *accelerometerDictionary;
+@property (strong, nonatomic) NSDictionary *magTrixDictionary;
 
 #pragma mark - UIView Methods
 
