@@ -40,5 +40,4 @@
 - (void) receiveAccelerometerValues:(NSNotification *)accelerometerDictionary;
 - (void) updateModelPosition;
 
-
 @end
