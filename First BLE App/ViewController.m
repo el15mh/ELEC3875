@@ -218,6 +218,11 @@
         NSString *temp = [data substringToIndex:4];
         NSInteger value = [temp intValue];
         
+        uint8_t x = value & 0x0F;
+        uint8_t y = (value & 0xF0) >> 8;
+        
+        NSLog(@"x: %d, y: %d", x, y);
+        
         if (value == 255) {
             self.counter = 0;
         }

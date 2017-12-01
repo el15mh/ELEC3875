@@ -20,6 +20,7 @@
 		4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C41F4F1A0F00B81963 /* DataModel.m */; };
 		4463F9C81F4F21FC00B81963 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9C71F4F21FC00B81963 /* Device.m */; };
 		4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4463F9CD1F4F4A6B00B81963 /* TableViewController.m */; };
+		448BDC191FD18D41003B3015 /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 448BDC181FD18D41003B3015 /* DataViewController.m */; };
 		44B290211F55AAF700F995FC /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B290201F55AAF700F995FC /* SceneKit.framework */; };
 		44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CE1D4E1F58129500CA79CE /* SceneKitViewController.m */; };
 		44CE1D921F581C8E00CA79CE /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 44CE1D911F581C8E00CA79CE /* art.scnassets */; };
@@ -70,6 +71,8 @@
 		4463F9C71F4F21FC00B81963 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
 		4463F9CC1F4F4A6B00B81963 /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TableViewController.h; path = ../TableViewController.h; sourceTree = "<group>"; };
 		4463F9CD1F4F4A6B00B81963 /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TableViewController.m; path = ../TableViewController.m; sourceTree = "<group>"; };
+		448BDC171FD18D41003B3015 /* DataViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
+		448BDC181FD18D41003B3015 /* DataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		44AB91351FC3657D007E414F /* Bluetooth-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Bluetooth-logo.png"; path = "../../../../Downloads/Bluetooth-logo.png"; sourceTree = "<group>"; };
 		44B290201F55AAF700F995FC /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneKitViewController.h; path = ../SceneKitViewController.h; sourceTree = "<group>"; };
@@ -136,6 +139,8 @@
 				44E9E2A31F5609F6007948A2 /* Constants.h */,
 				4448DDB61F45AC2500A24D62 /* ViewController.h */,
 				4448DDB71F45AC2500A24D62 /* ViewController.m */,
+				448BDC171FD18D41003B3015 /* DataViewController.h */,
+				448BDC181FD18D41003B3015 /* DataViewController.m */,
 				4463F9CC1F4F4A6B00B81963 /* TableViewController.h */,
 				4463F9CD1F4F4A6B00B81963 /* TableViewController.m */,
 				44CE1D4D1F58129500CA79CE /* SceneKitViewController.h */,
@@ -338,6 +343,7 @@
 				4463F9CE1F4F4A6B00B81963 /* TableViewController.m in Sources */,
 				4463F9C51F4F1A0F00B81963 /* DataModel.m in Sources */,
 				4448DDB51F45AC2500A24D62 /* AppDelegate.m in Sources */,
+				448BDC191FD18D41003B3015 /* DataViewController.m in Sources */,
 				4463F9C81F4F21FC00B81963 /* Device.m in Sources */,
 				444F32151F6941CF00F3ADCB /* Bone.m in Sources */,
 				44CE1D4F1F58129500CA79CE /* SceneKitViewController.m in Sources */,
