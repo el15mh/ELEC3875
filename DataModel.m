@@ -52,6 +52,8 @@
     self.mlx15 = [[MLX90393 alloc] init];
     self.mlx16 = [[MLX90393 alloc] init];
     
+    self.mlx5.z = 36.3f;
+    
     self.fibula.length = 67;
     self.navicular.length = 25;
     self.calcaneus.length = 17;

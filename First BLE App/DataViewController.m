@@ -182,7 +182,69 @@
 
 - (void) updateData
 {
+    self.x1Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx1.x];
+    self.y1Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx1.y];
+    self.z1Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx1.z];
     
+    self.x2Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx2.x];
+    self.y2Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx2.y];
+    self.z2Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx2.z];
+    
+    self.x3Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx3.x];
+    self.y3Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx3.y];
+    self.z3Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx3.z];
+    
+    self.x4Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx4.x];
+    self.y4Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx4.y];
+    self.z4Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx4.z];
+    
+    self.x5Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx5.x];
+    self.y5Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx5.y];
+    self.z5Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx5.z];
+    
+    self.x6Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx6.x];
+    self.y6Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx6.y];
+    self.z6Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx6.z];
+    
+    self.x7Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx7.x];
+    self.y7Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx7.y];
+    self.z7Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx7.z];
+    
+    self.x8Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx8.x];
+    self.y8Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx8.y];
+    self.z8Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx8.z];
+    
+    self.x9Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx9.x];
+    self.y9Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx9.y];
+    self.z9Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx9.z];
+    
+    self.x10Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx10.x];
+    self.y10Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx10.y];
+    self.z10Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx10.z];
+    
+    self.x11Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx11.x];
+    self.y11Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx11.y];
+    self.z11Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx11.z];
+    
+    self.x12Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx12.x];
+    self.y12Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx12.y];
+    self.z12Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx12.z];
+    
+    self.x13Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx13.x];
+    self.y13Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx13.y];
+    self.z13Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx13.z];
+    
+    self.x14Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx14.x];
+    self.y14Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx14.y];
+    self.z14Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx14.z];
+    
+    self.x15Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx15.x];
+    self.y15Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx15.y];
+    self.z15Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx15.z];
+    
+    self.x16Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx16.x];
+    self.y16Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx16.y];
+    self.z16Label.text = [NSString stringWithFormat:@"%ld", (unsigned long)self.model.mlx16.z];
 }
 
 @end
