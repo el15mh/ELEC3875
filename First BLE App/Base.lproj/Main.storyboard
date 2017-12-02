@@ -953,7 +953,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFb-sW-8sp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5738" y="904"/>
+            <point key="canvasLocation" x="5737" y="904"/>
         </scene>
         <!--Data View Controller-->
         <scene sceneID="Xad-yj-qXS">
@@ -1441,13 +1441,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZUE-En-uyA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6631" y="1761"/>
+            <point key="canvasLocation" x="6630" y="1671"/>
         </scene>
         <!--Data-->
         <scene sceneID="6wF-lW-A0f">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5p3-Yd-1ru" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Data" id="aSs-iF-TZE"/>
+                    <tabBarItem key="tabBarItem" title="Data" image="DataIcon.png" id="aSs-iF-TZE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pai-PO-fFQ">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1460,11 +1460,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P8S-41-6EL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5737" y="1761"/>
+            <point key="canvasLocation" x="5737" y="1671"/>
         </scene>
     </scenes>
     <resources>
         <image name="Bluetooth-logo.png" width="1200" height="880"/>
+        <image name="DataIcon.png" width="25" height="25"/>
         <image name="FootIcon" width="25" height="25"/>
         <image name="FormIcon" width="25" height="25"/>
     </resources>
