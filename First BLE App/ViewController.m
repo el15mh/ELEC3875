@@ -244,16 +244,15 @@
         NSString *data = [[NSString alloc] initWithData:characteristic.value
                                                encoding:NSUTF8StringEncoding];
         
-        unsigned long test = [data doubleValue];
-        self.yRotationLabel.text = [NSString stringWithFormat:@"test: %ld", test];
+        NSInteger test = [data integerValue];
         
-        const char *uft8String = [data UTF8String];
+        unsigned long dataArray[8];
         
-        //NSLog(@"%x", uft8String[0]);
+        dataArray[1] = (test & 0xFF00) >> 8;
+        dataArray[0] = (test & 0x00FF);
         
-        self.xRotationLabel.text = [NSString stringWithFormat:@"0x%x %i", uft8String[0], uft8String[0]];
-        
-                          
+        self.yRotationLabel.text = [NSString stringWithFormat:@"0x%lx", test];
+        self.xRotationLabel.text = [NSString stringWithFormat:@"0x%lx.%lx", dataArray[1], dataArray[0]];
         
         NSString *temp = [data substringToIndex:4];
         NSInteger value = [temp intValue];

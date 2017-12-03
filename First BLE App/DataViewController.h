@@ -14,8 +14,6 @@
 
 @interface DataViewController : UIViewController
 
-@property DataModel *model;
-
 @property (weak, nonatomic) IBOutlet UILabel *x1Label;
 @property (weak, nonatomic) IBOutlet UILabel *x2Label;
 @property (weak, nonatomic) IBOutlet UILabel *x3Label;
@@ -66,6 +64,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *z14Label;
 @property (weak, nonatomic) IBOutlet UILabel *z15Label;
 @property (weak, nonatomic) IBOutlet UILabel *z16Label;
+
+@property (strong, nonnull) DataModel *model;
 
 - (void) receiveMagTrixValues:(NSNotification *)magTrixDictionary;
 - (void) updateData;
