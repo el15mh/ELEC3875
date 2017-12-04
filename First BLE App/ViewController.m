@@ -256,12 +256,76 @@
         } else if (self.counter == 2) {
             self.model.acc1.rotation_y = (value - 125.0f) * 0.72f;
         }
+        // DEVICE 1
+        else if (self.counter == 3) self.model.mlx1.x = (value - 125) * 3.2;
+        else if (self.counter == 4) self.model.mlx1.y = (value - 125) * 3.2;
+        else if (self.counter == 5) self.model.mlx1.z = (value - 125) * 3.2;
+        //DEVICE 2
+        else if (self.counter == 6) self.model.mlx2.x = (value - 125) * 3.2;
+        else if (self.counter == 7) self.model.mlx2.y = (value - 125) * 3.2;
+        else if (self.counter == 8) self.model.mlx2.z = (value - 125) * 3.2;
+        // DEVICE 3
+        else if (self.counter == 9) self.model.mlx3.x = (value - 125) * 3.2;
+        else if (self.counter == 10) self.model.mlx3.y = (value - 125) * 3.2;
+        else if (self.counter == 11) self.model.mlx3.z = (value - 125) * 3.2;
+        //DEVICE 4
+        else if (self.counter == 12) self.model.mlx4.x = (value - 125) * 3.2;
+        else if (self.counter == 13) self.model.mlx4.y = (value - 125) * 3.2;
+        else if (self.counter == 14) self.model.mlx4.z = (value - 125) * 3.2;
+        // DEVICE 5
+        else if (self.counter == 15) self.model.mlx5.x = (value - 125) * 3.2;
+        else if (self.counter == 16) self.model.mlx5.y = (value - 125) * 3.2;
+        else if (self.counter == 17) self.model.mlx5.z = (value - 125) * 3.2;
+        //DEVICE 6
+        else if (self.counter == 18) self.model.mlx6.x = (value - 125) * 3.2;
+        else if (self.counter == 19) self.model.mlx6.y = (value - 125) * 3.2;
+        else if (self.counter == 20) self.model.mlx6.z = (value - 125) * 3.2;
+        // DEVICE 7
+        else if (self.counter == 21) self.model.mlx7.x = (value - 125) * 3.2;
+        else if (self.counter == 22) self.model.mlx7.y = (value - 125) * 3.2;
+        else if (self.counter == 23) self.model.mlx7.z = (value - 125) * 3.2;
+        //DEVICE 8
+        else if (self.counter == 24) self.model.mlx8.x = (value - 125) * 3.2;
+        else if (self.counter == 25) self.model.mlx8.y = (value - 125) * 3.2;
+        else if (self.counter == 26) self.model.mlx8.z = (value - 125) * 3.2;
+        // DEVICE 9
+        else if (self.counter == 27) self.model.mlx9.x = (value - 125) * 3.2;
+        else if (self.counter == 28) self.model.mlx9.y = (value - 125) * 3.2;
+        else if (self.counter == 29) self.model.mlx9.z = (value - 125) * 3.2;
+        //DEVICE 10
+        else if (self.counter == 30) self.model.mlx10.x = (value - 125) * 3.2;
+        else if (self.counter == 31) self.model.mlx10.y = (value - 125) * 3.2;
+        else if (self.counter == 32) self.model.mlx10.z = (value - 125) * 3.2;
+        // DEVICE 11
+        else if (self.counter == 33) self.model.mlx11.x = (value - 125) * 3.2;
+        else if (self.counter == 34) self.model.mlx11.y = (value - 125) * 3.2;
+        else if (self.counter == 35) self.model.mlx11.z = (value - 125) * 3.2;
+        //DEVICE 12
+        else if (self.counter == 36) self.model.mlx12.x = (value - 125) * 3.2;
+        else if (self.counter == 37) self.model.mlx12.y = (value - 125) * 3.2;
+        else if (self.counter == 38) self.model.mlx12.z = (value - 125) * 3.2;
+        // DEVICE 13
+        else if (self.counter == 39) self.model.mlx13.x = (value - 125) * 3.2;
+        else if (self.counter == 40) self.model.mlx13.y = (value - 125) * 3.2;
+        else if (self.counter == 41) self.model.mlx13.z = (value - 125) * 3.2;
+        //DEVICE 14
+        else if (self.counter == 42) self.model.mlx14.x = (value - 125) * 3.2;
+        else if (self.counter == 43) self.model.mlx14.y = (value - 125) * 3.2;
+        else if (self.counter == 44) self.model.mlx14.z = (value - 125) * 3.2;
+        // DEVICE 15
+        else if (self.counter == 45) self.model.mlx15.x = (value - 125) * 3.2;
+        else if (self.counter == 46) self.model.mlx15.y = (value - 125) * 3.2;
+        else if (self.counter == 47) self.model.mlx15.z = (value - 125) * 3.2;
+        //DEVICE 16
+        else if (self.counter == 48) self.model.mlx16.x = (value - 125) * 3.2;
+        else if (self.counter == 49) self.model.mlx16.y = (value - 125) * 3.2;
+        else if (self.counter == 50) self.model.mlx16.z = (value - 125) * 3.2;
         
         self.xRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_x];
         self.yRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_y];
         
         self.counter++;
-        if (self.counter > 2) self.counter = 0;
+        if (self.counter == 51) self.counter = 0;
     }
 }
 
