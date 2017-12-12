@@ -244,18 +244,30 @@
         NSString *data = [[NSString alloc] initWithData:characteristic.value
                                                encoding:NSUTF8StringEncoding];
         
-        NSString *temp = [data substringToIndex:4];
-        NSInteger value = [temp intValue];
+        //NSString *temp = [data substringToIndex:4];
+        //NSLog(@"input data: %@", data);
         
-        if (value == 255) {
-            self.counter = 0;
-        }
+        unsigned result = 0;
         
-        if (self.counter == 1) {
+        NSScanner *scanner = [NSScanner scannerWithString:data];
+        [scanner scanHexInt:&result];
+        
+        NSLog(@"0x%x", result);
+        
+        //NSInteger value = [temp floatValue];
+        
+        self.model.acc1.rotation_x = (result - 125) * 0.72;
+        
+        /*
+        
+        if (value == 255) self.counter = 0;
+        
+        if (self.counter == 1)      {
             self.model.acc1.rotation_x = (value - 125.0f) * 0.72f;
-        } else if (self.counter == 2) {
-            self.model.acc1.rotation_y = (value - 125.0f) * 0.72f;
+            NSLog(@"value: %i", value);
         }
+        else if (self.counter == 2) self.model.acc1.rotation_y = (value - 125.0f) * 0.72f;
+        
         // DEVICE 1
         else if (self.counter == 3) self.model.mlx1.x = (value - 125) * 3.2;
         else if (self.counter == 4) self.model.mlx1.y = (value - 125) * 3.2;
@@ -320,12 +332,13 @@
         else if (self.counter == 48) self.model.mlx16.x = (value - 125) * 3.2;
         else if (self.counter == 49) self.model.mlx16.y = (value - 125) * 3.2;
         else if (self.counter == 50) self.model.mlx16.z = (value - 125) * 3.2;
-        
+        */
+         
         self.xRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_x];
         self.yRotationLabel.text = [NSString stringWithFormat:@"%ld", (long)self.model.acc1.rotation_y];
         
         self.counter++;
-        if (self.counter == 51) self.counter = 0;
+        if (self.counter >= 3) self.counter = 0;
     }
 }
 

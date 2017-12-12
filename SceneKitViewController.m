@@ -65,8 +65,6 @@
     // Configure the background
     self.scnView.backgroundColor = [UIColor whiteColor];
     
-    // Retrieve the SCNView and add the scene to the view
-    self.scnView.scene = scene;
     //self.scnView.showsStatistics = YES;
     
 #pragma mark - Retrieve model nodes and start motion
@@ -96,7 +94,7 @@
                                              selector:@selector(receiveAccelerometerValues:)
                                                  name:@"AccelerometerValues"
                                                object:nil];
-    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -106,25 +104,25 @@
 - (void) updateModelPosition
 {
     // Using constraints (obtained arbitrarily from 3D model) to give rough limits to bone rotation
-    float calcaneusX = self.model.calcaneus.currentXRotation;
-    float phalangeX = self.model.phalange.currentXRotation;
-    float metatarsalX = self.model.metatarsal.currentXRotation;
+    float metatarsalX = [self.model calculateRotation:(self.model.acc1.rotation_x + METATARSAL_X_OFFSET)
+                                               onAxis:@"x"
+                                              forBone:self.model.metatarsal];
     
-    metatarsalX += [self.model calculateRotation:(self.model.acc1.rotation_x + METATARSAL_X_OFFSET)
-                                          onAxis:@"x"
-                                         forBone:self.model.metatarsal];
-    
-    phalangeX += [self.model calculateRotation:self.model.acc1.rotation_x
+    float phalangeX = [self.model calculateRotation:self.model.acc1.rotation_x
                                         onAxis:@"x"
                                        forBone:self.model.phalange];
     
-    calcaneusX += [self.model calculateRotation:self.model.acc1.rotation_x
+    float calcaneusX = [self.model calculateRotation:self.model.acc1.rotation_x
                                          onAxis:@"x"
                                         forBone:self.model.calcaneus];
     
     //[self.calcaneusNode setRotation:SCNVector4Make(0.0f, 1.0f, 0.0f, self.model.calcaneus.currentYRotation*DEG2RAD)];
     //[self.phalangeNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.phalange.currentXRotation*DEG2RAD)];
-    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, metatarsalX*DEG2RAD)];
+    
+    
+    [self.metatarsalNode setRotation:SCNVector4Make(1.0f, 0.0f, 0.0f, self.model.acc1.rotation_x*DEG2RAD)];
+    
+    
     //NSLog(@"metatarsal node rotation: %f", self.metatarsalNode.rotation.x);
 }
 
@@ -165,7 +163,7 @@
 
 - (IBAction)calibrateButtonPressed:(UIBarButtonItem *)sender
 {
-    NSLog(@"Calibrate button pressed");
+    //NSLog(@"Calibrate button pressed");
     
     self.model.calcaneus.currentXRotation = 0.0f;
     self.model.phalange.currentXRotation = 0.0f;

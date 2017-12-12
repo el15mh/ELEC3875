@@ -12,7 +12,6 @@
 #import "SceneKitViewController.h"
 
 #include "DataModel.h"
-//#include "Device.h"
 #include "Constants.h"
 
 @import QuartzCore;
